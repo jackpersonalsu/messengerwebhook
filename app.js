@@ -160,19 +160,15 @@ function callOpenApi(senderPsid, requestText) {
     // //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
     // // };
     const output =data.choices[0].text + " for sender " + senderPsid;
-    console.log('before sen aa');
+   
     const response = {
       'text': output
     };
-    // console.log(response);
-    // console.log('calling callSeender');
-      // Send the response message
-    callSendAPI(senderPsid, response);
 
-    // callSendAPI(senderPsid,  {
-    //   'text': 'whatsogonignonggggtttt'
-    // });
-    console.log('after sen aaa');
+    console.log('sending');
+    console.log(output);
+
+    callSendAPI(senderPsid, response);
   });
 }
 
@@ -187,7 +183,7 @@ function callSendAPI(senderPsid, response) {
     'recipient': {
       'id': senderPsid
     },
-    'message': response
+    'message': response.text
   };
   console.log('response body');
   console.log(requestBody);
