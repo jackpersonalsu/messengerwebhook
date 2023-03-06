@@ -95,10 +95,12 @@ app.post('/webhook', (req, res) => {
       let senderPsid = webhookEvent.sender.id;
       console.log('V8 Sender PSID: ' + senderPsid);
       console.log('recipient ' + webhookEvent.recipient.id);
-
+      console.log('equal strnig or num');
+      console.log( webhookEvent.recipient.id === '105907225783056');
+      console.log(webhookEvent.recipient.id === 105907225783056);
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      if (webhookEvent.message && webhookEvent.recipient.id !== '105907225783056') {
+      if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
         handleMessage(senderPsid, webhookEvent.message);
       } else if (webhookEvent.postback) {
         handlePostback(senderPsid, webhookEvent.postback);
