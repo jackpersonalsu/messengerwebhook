@@ -148,12 +148,9 @@ function callOpenApi(senderPsid, requestText) {
   });
   console.log('after call await v8');
   completion.then((result) => {
-    console.log('data v11');
+    console.log('data v12');
     const data = result.data;
-    // console.log('data v10');
-    // console.log(data);
-    // console.log('data data');
-    // console.log(data.data);
+
     console.log('choice');
     console.log(data.choices[0].text);
   
@@ -162,19 +159,19 @@ function callOpenApi(senderPsid, requestText) {
     // // response = {
     // //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
     // // };
-    // const output =data.choices[0].text + " for sender " + senderPsid;
-  
-    // const response = {
-    //   'text': output
-    // };
+    const output =data.choices[0].text + " for sender " + senderPsid;
+    console.log('before sen aa');
+    const response = {
+      'text': output
+    };
     // console.log(response);
     // console.log('calling callSeender');
       // Send the response message
-    // callSendAPI(senderPsid, response);
-    console.log('before sen aa');
-    callSendAPI(senderPsid,  {
-      'text': 'whatsogonignonggggtttt'
-    });
+    callSendAPI(senderPsid, response);
+
+    // callSendAPI(senderPsid,  {
+    //   'text': 'whatsogonignonggggtttt'
+    // });
     console.log('after sen aaa');
   });
 }
