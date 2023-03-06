@@ -96,17 +96,6 @@ app.post('/webhook', (req, res) => {
       let senderPsid = webhookEvent.sender.id;
       console.log('Sender PSID: ' + senderPsid);
 
-      console.log('open ai 000');
-      const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-console.log('open ai 110');
-const openai = new OpenAIApi(configuration);
-console.log('open ai 111');
-  console.log(openai);
-
 // const completion = await openai.createCompletion({
 //   model: "text-davinci-003",
 //   prompt: "Hello world",
@@ -176,23 +165,23 @@ function handleMessage(senderPsid, receivedMessage) {
     };
   }
 
+
+  
+
   // Send the response message
   callSendAPI(senderPsid, response);
 }
+
+
 
 // Handles messaging_postbacks events
 function handlePostback(senderPsid, receivedPostback) {
   let response;
 
-
-
-
   // Get the payload for the postback
   let payload = receivedPostback.payload;
   console.log('payload is');
   console.log(payload);
-
-
 
   // Set the response based on the postback payload
   if (payload === 'yes') {
@@ -203,7 +192,26 @@ function handlePostback(senderPsid, receivedPostback) {
     response = {'text': 'recevied one messageressponse back' };
   }
   // Send the message to acknowledge the postback
+  callOpenApi();
   callSendAPI(senderPsid, response);
+}
+
+function callOpenApi() {
+  console.log('calling open api');
+
+  console.log('open ai tttg000');
+  const { Configuration, OpenAIApi } = require("openai");
+
+  const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+  });
+  console.log('open aigg 110');
+  const openai = new OpenAIApi(configuration);
+
+
+  console.log('open aigg 111');
+  console.log(openai);
+
 }
 
 // Sends response messages via the Send API
