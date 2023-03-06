@@ -79,7 +79,7 @@ app.get('/webhook', (req, res) => {
 });
 
 // Creates the endpoint for your webhook
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
   let body = req.body;
 
   // Checks if this is an event from a page subscription
@@ -99,7 +99,7 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhookEvent.message) {
-        handleMessage(senderPsid, webhookEvent.message);
+        await handleMessage(senderPsid, webhookEvent.message);
       } else if (webhookEvent.postback) {
         handlePostback(senderPsid, webhookEvent.postback);
       }
