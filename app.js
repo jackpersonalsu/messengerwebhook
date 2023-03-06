@@ -117,7 +117,7 @@ app.post('/webhook', async (req, res) => {
 // Handles messages events
 async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage v2:");
+  console.log("in handeMessage v3:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
@@ -139,8 +139,9 @@ async function callOpenApi(senderPsid, requestText) {
   });
     
   const openai = new OpenAIApi(configuration);
-  
-  const completion = await openai.createCompletion({
+  console.log('open ai');
+  console.log(openai);
+  const completion = openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
