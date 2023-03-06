@@ -93,11 +93,7 @@ app.post('/webhook', (req, res) => {
 
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
-      console.log('V8 Sender PSID: ' + senderPsid);
-      console.log('recipient ' + webhookEvent.recipient.id);
-      console.log('equal strnig or num');
-      console.log( webhookEvent.recipient.id === '105907225783056');
-      console.log(webhookEvent.recipient.id === 105907225783056);
+
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
@@ -152,13 +148,13 @@ function callOpenApi(senderPsid, requestText) {
   });
   console.log('after call await v8');
   completion.then((result) => {
-    console.log('data v10');
-    const data = result.data.data;
+    console.log('data v11');
+    const data = result.data;
     // console.log('data v10');
     // console.log(data);
     // console.log('data data');
     // console.log(data.data);
-    // console.log('choice');
+    console.log('choice');
     console.log(data.choices[0].text);
   
     // console.log('text is ' + requestText);
