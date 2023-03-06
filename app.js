@@ -189,7 +189,7 @@ async function callOpenApi(senderPsid, requestText) {
   //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
   // };
   response = {
-    'text': `Hello from chatbot: '${completion.data.choices[0].text}' for ${senderPsid}`
+    'text': `Hello from chatbot: '${completion.data.choices[0].text}' for '${senderPsid}'`
   };
     // Send the response message
   callSendAPI(senderPsid, response);
