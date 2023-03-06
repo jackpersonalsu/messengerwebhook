@@ -117,11 +117,11 @@ app.post('/webhook', async (req, res) => {
 // Handles messages events
 async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage v3:");
+  console.log("in handeMessage v6:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    callOpenApi(senderPsid, receivedMessage.text);
+    await callOpenApi(senderPsid, receivedMessage.text);
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
     let attachmentUrl = receivedMessage.attachments[0].payload.url;
@@ -140,7 +140,7 @@ async function callOpenApi(senderPsid, requestText) {
     
   const openai = new OpenAIApi(configuration);
   console.log('open ai');
-  console.log(openai);
+
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
