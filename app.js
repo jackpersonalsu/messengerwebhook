@@ -141,7 +141,7 @@ async function callOpenApi(senderPsid, requestText) {
   const openai = new OpenAIApi(configuration);
   console.log('open ai');
   console.log(openai);
-  const completion = openai.createCompletion({
+  const completion = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
