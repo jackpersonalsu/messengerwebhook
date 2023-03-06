@@ -115,52 +115,19 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(senderPsid, receivedMessage) {
+async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage:");
-
+  console.log("in handeMessage v2:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    callOpenApi(senderPsid, receivedMessage.text);
-   
+    await callOpenApi(senderPsid, receivedMessage.text);
   } else if (receivedMessage.attachments) {
-
     // Get the URL of the message attachment
     let attachmentUrl = receivedMessage.attachments[0].payload.url;
-    response = {
-      'attachment': {
-        'type': 'template',
-        'payload': {
-          'template_type': 'generic',
-          'elements': [{
-            'title': 'Is this the right picture?',
-            'subtitle': 'Tap a button to answer.',
-            'image_url': attachmentUrl,
-            'buttons': [
-              {
-                'type': 'postback',
-                'title': 'Yes!',
-                'payload': 'yes',
-              },
-              {
-                'type': 'postback',
-                'title': 'No!',
-                'payload': 'no',
-              }
-            ],
-          }]
-        }
-      }
-    };
-    callSendAPI(senderPsid, response);
+    callSendAPI(attachmentUrl, response);
   }
-
-
-
-
 }
-
 
 async function callOpenApi(senderPsid, requestText) {
   
@@ -170,9 +137,7 @@ async function callOpenApi(senderPsid, requestText) {
   const configuration = new Configuration({
    apiKey: process.env.OPENAI_API_KEY,
   });
-  
-  console.log('openai key' + configuration);
-  
+    
   const openai = new OpenAIApi(configuration);
   
   const completion = await openai.createCompletion({
@@ -260,3 +225,31 @@ function handlePostback(senderPsid, receivedPostback) {
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+function sendAttachment(attachmentUrl, senderPsid) {
+  response = {
+    'attachment': {
+      'type': 'template',
+      'payload': {
+        'template_type': 'generic',
+        'elements': [{
+          'title': 'Is this the right picture?',
+          'subtitle': 'Tap a button to answer.',
+          'image_url': attachmentUrl,
+          'buttons': [
+            {
+              'type': 'postback',
+              'title': 'Yes!',
+              'payload': 'yes',
+            },
+            {
+              'type': 'postback',
+              'title': 'No!',
+              'payload': 'no',
+            }
+          ],
+        }]
+      }
+    }
+  };
+}
