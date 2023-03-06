@@ -174,7 +174,7 @@ function handlePostback(senderPsid, receivedPostback) {
   } else if (payload === 'no') {
     response = { 'text': 'Oops, try sending another image.' };
   } else {
-    response = {'text': 'appding own info for ' + payload };
+    response = {'text': 'recevied one messageressponse back' };
   }
   // Send the message to acknowledge the postback
   callSendAPI(senderPsid, response);
@@ -194,6 +194,8 @@ function callSendAPI(senderPsid, response) {
     },
     'message': response
   };
+  console.log('response body');
+  console.log(requestBody);
 
   // Send the HTTP request to the Messenger Platform
   request({
@@ -201,12 +203,17 @@ function callSendAPI(senderPsid, response) {
     'qs': { 'access_token': PAGE_ACCESS_TOKEN },
     'method': 'POST',
     'json': requestBody
-  }, (err, _res, _body) => {
+  }, (err, res, body) => {
+    console.log('in request call back');
+    console.log(err);
+    console.log(res);
+    console.log(body);
     if (!err) {
       console.log('Message sent!');
     } else {
       console.error('Unable to send message:' + err);
     }
+    console.log('done poir');
   });
 }
 
