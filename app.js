@@ -146,23 +146,27 @@ async function callOpenApi(senderPsid, requestText) {
     prompt: "Please reply to the following: " + requestText,
   });
   console.log('after call await');
-  console.log(completion);
-  console.log(completion.data.choices[0].text);
-
-  console.log('text is ' + requestText);
-  console.log('response is' + completion.data.choices[0].text);
-  // response = {
-  //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
-  // };
-  const output = completion.data.choices[0].text + " for sender " + senderPsid;
-
-  const response = {
-    'text': output
-  };
-  console.log(response);
-  console.log('calling callSeender');
-    // Send the response message
-  callSendAPI(senderPsid, response);
+  Promise.resolve(completion).then((result) => {
+    data = result;
+    console.log('data ');
+    console.log(data);
+    console.log(data.choices[0].text);
+  
+    console.log('text is ' + requestText);
+    console.log('response is' + data.choices[0].text);
+    // response = {
+    //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
+    // };
+    const output =data.choices[0].text + " for sender " + senderPsid;
+  
+    const response = {
+      'text': output
+    };
+    console.log(response);
+    console.log('calling callSeender');
+      // Send the response message
+    callSendAPI(senderPsid, response);
+  });
 }
 
 // Sends response messages via the Send API
