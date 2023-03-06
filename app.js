@@ -96,6 +96,11 @@ app.post('/webhook', (req, res) => {
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
       console.log('Sender PSID: ' + senderPsid);
+      console.log('open ai');
+      console.log(openai_api_key);
+      const openai_client = new openai(openai_api_key);
+    
+      console.log(openai_client);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
@@ -169,17 +174,14 @@ function handlePostback(senderPsid, receivedPostback) {
   let response;
 
 
-  console.log('payload is');
+
 
   // Get the payload for the postback
   let payload = receivedPostback.payload;
+  console.log('payload is');
   console.log(payload);
 
-  console.log('open ai');
-  console.log(openai_api_key);
-  const openai_client = new openai(openai_api_key);
 
-  console.log(openai_client);
 
   // Set the response based on the postback payload
   if (payload === 'yes') {
