@@ -173,9 +173,11 @@ function callOpenApi(senderPsid, requestText) {
     // console.log('calling callSeender');
       // Send the response message
     // callSendAPI(senderPsid, response);
-        callSendAPI(senderPsid,  {
+    console.log('before sen');
+    callSendAPI(senderPsid,  {
       'text': 'whatsogonignon'
     });
+    console.log('after sen');
   });
 }
 
