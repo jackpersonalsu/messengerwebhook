@@ -44,7 +44,7 @@ app.get('/', function (_req, res) {
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
-  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+  const VERIFY_TOKEN = 'boboverifytoken';
 
   // Parse the query params
   let mode = req.query['hub.mode'];
@@ -178,14 +178,15 @@ function handlePostback(senderPsid, receivedPostback) {
 function callSendAPI(senderPsid, response) {
 
   // The page access token we have generated in your app settings
-  const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+  // const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+  const PAGE_ACCESS_TOKEN = 'EAAMnZCr5c0n4BANYHU472BuQ9ID5InzW0AZBrTfK5jGKTlwr6jkWCpH5rzTg974nhcJHXIg4iTy6OicuYzZBHQyWwhb5b4ZCZAKwr6DYLD526g9HW0FMA9afxUnSBC7MzIyqQdCtx9sAjN2nfC0qnfV6TEfIuqIkrBRq4Li80NZCsuyjdmtrqZC5RqafCzDnuMZD';
 
   // Construct the message body
   let requestBody = {
     'recipient': {
       'id': senderPsid
     },
-    'message': response
+    'message': 'changed by jack webhook' + response
   };
 
   // Send the HTTP request to the Messenger Platform
