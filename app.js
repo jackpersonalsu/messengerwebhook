@@ -170,8 +170,10 @@ async function callOpenApi() {
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+   apiKey: process.env.OPENAI_API_KEY,
   });
+  console.log('openai key' + configuration);
+  
   const openai = new OpenAIApi(configuration);
   
   const completion = await openai.createCompletion({
