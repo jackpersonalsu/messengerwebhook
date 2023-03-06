@@ -178,6 +178,8 @@ async function callOpenApi() {
     model: "text-davinci-003",
     prompt: "Hello world from jacksu",
   });
+  console.log('after call await');
+  console.log(completion.data);
   console.log(completion.data.choices[0].text);
 }
 
