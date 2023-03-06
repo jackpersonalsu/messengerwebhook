@@ -114,9 +114,12 @@ app.post('/webhook', (req, res) => {
 // Handles messages events
 function handleMessage(senderPsid, receivedMessage) {
   let response;
+  console.log("in handeMessage:");
+
 
   // Checks if the message contains text
   if (receivedMessage.text) {
+    console.log('text is ' + recievedMessage.text);
     // Create the payload for a basic text message, which
     // will be added to the body of your request to the Send API
     response = {
@@ -160,7 +163,8 @@ function handleMessage(senderPsid, receivedMessage) {
 // Handles messaging_postbacks events
 function handlePostback(senderPsid, receivedPostback) {
   let response;
-
+  console.log('response is');
+  console.log(response);
   // Get the payload for the postback
   let payload = receivedPostback.payload;
 
@@ -169,6 +173,8 @@ function handlePostback(senderPsid, receivedPostback) {
     response = { 'text': 'Thanks!' };
   } else if (payload === 'no') {
     response = { 'text': 'Oops, try sending another image.' };
+  } else {
+    response = {'text': 'appding own info for ' + payload };
   }
   // Send the message to acknowledge the postback
   callSendAPI(senderPsid, response);
@@ -176,7 +182,7 @@ function handlePostback(senderPsid, receivedPostback) {
 
 // Sends response messages via the Send API
 function callSendAPI(senderPsid, response) {
-
+  console.log("in call send API, changing message");
   // The page access token we have generated in your app settings
   // const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
   const PAGE_ACCESS_TOKEN = 'EAAMnZCr5c0n4BANYHU472BuQ9ID5InzW0AZBrTfK5jGKTlwr6jkWCpH5rzTg974nhcJHXIg4iTy6OicuYzZBHQyWwhb5b4ZCZAKwr6DYLD526g9HW0FMA9afxUnSBC7MzIyqQdCtx9sAjN2nfC0qnfV6TEfIuqIkrBRq4Li80NZCsuyjdmtrqZC5RqafCzDnuMZD';
@@ -186,7 +192,7 @@ function callSendAPI(senderPsid, response) {
     'recipient': {
       'id': senderPsid
     },
-    'message': 'changed by jack webhook' + response
+    'message': response
   };
 
   // Send the HTTP request to the Messenger Platform
