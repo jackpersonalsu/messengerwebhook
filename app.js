@@ -147,7 +147,7 @@ function callOpenApi(senderPsid, requestText) {
   });
   console.log('after call await v8');
   Promise.resolve(completion).then((result) => {
-    data = result;
+    const data = result;
     console.log('data v8');
     console.log(data);
     console.log(data.choices[0].text);
