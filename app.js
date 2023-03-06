@@ -121,7 +121,7 @@ async function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    await callOpenApi(senderPsid, receivedMessage.text);
+    callOpenApi(senderPsid, receivedMessage.text);
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
     let attachmentUrl = receivedMessage.attachments[0].payload.url;
