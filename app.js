@@ -131,7 +131,7 @@ async function handleMessage(senderPsid, receivedMessage) {
 
 async function callOpenApi(senderPsid, requestText) {
   
-  console.log('calling open api async v3');
+  console.log('calling open api async v7');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
@@ -141,12 +141,12 @@ async function callOpenApi(senderPsid, requestText) {
   const openai = new OpenAIApi(configuration);
   console.log('calimg open ai');
 
-  const completion = await openai.createCompletion({
+  const completion = openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
   console.log('after call await');
-  console.log(completion.data);
+  console.log(completion);
   console.log(completion.data.choices[0].text);
 
   console.log('text is ' + requestText);
