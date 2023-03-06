@@ -146,7 +146,7 @@ function callOpenApi(senderPsid, requestText) {
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
-  console.log('after call await v15');
+  console.log('after call await v16');
   completion.then(async (result) => {
     console.log('data v15');
     const data = result.data;
