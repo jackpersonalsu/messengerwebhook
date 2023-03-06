@@ -185,7 +185,7 @@ function callSendAPI(senderPsid, response) {
   console.log("in call send API, changing message");
   // The page access token we have generated in your app settings
   // const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-  const PAGE_ACCESS_TOKEN = 'EAAMnZCr5c0n4BANYHU472BuQ9ID5InzW0AZBrTfK5jGKTlwr6jkWCpH5rzTg974nhcJHXIg4iTy6OicuYzZBHQyWwhb5b4ZCZAKwr6DYLD526g9HW0FMA9afxUnSBC7MzIyqQdCtx9sAjN2nfC0qnfV6TEfIuqIkrBRq4Li80NZCsuyjdmtrqZC5RqafCzDnuMZD';
+  const PAGE_ACCESS_TOKEN = 'EAAMnZCr5c0n4BAAvQGGechDBvLCZAvLzXyI2pJQmAwUBheAN1z4V3kDMZCoMRxjUDQuolgKRUxLKjLh8ScAftpUCImmoSxvpGQglvuAk3ctiB9mGVKtSxAJAvubpyE18AxzHA9fMrIsHh33B4dH1EOCC0LIjuoBmozonnfwgPTKzDrgAvoQrInXxFnGQRAZD';
 
   // Construct the message body
   let requestBody = {
