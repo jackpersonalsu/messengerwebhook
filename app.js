@@ -90,11 +90,11 @@ app.post('/webhook', (req, res) => {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
-      console.log(webhookEvent);
 
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
-      console.log('Sender PSID: ' + senderPsid);
+      console.log('V8 Sender PSID: ' + senderPsid);
+      console.log('recipient ' + webhookEvent.recipient.id);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
@@ -117,7 +117,7 @@ app.post('/webhook', (req, res) => {
 // Handles messages events
 function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage v6:");
+  console.log("in handeMessage v8:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
@@ -131,7 +131,7 @@ function handleMessage(senderPsid, receivedMessage) {
 
 function callOpenApi(senderPsid, requestText) {
   
-  console.log('calling open api async v7');
+  console.log('calling open api async v8');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
