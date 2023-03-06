@@ -119,7 +119,7 @@ function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    console.log('text is ' + recievedMessage.text);
+    console.log('text is ' + receivedMessage.text);
     // Create the payload for a basic text message, which
     // will be added to the body of your request to the Send API
     response = {
