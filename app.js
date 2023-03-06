@@ -131,7 +131,7 @@ async function handleMessage(senderPsid, receivedMessage) {
 
 async function callOpenApi(senderPsid, requestText) {
   
-  console.log('calling open api async');
+  console.log('calling open api async v3');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
