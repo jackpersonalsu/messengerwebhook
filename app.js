@@ -96,12 +96,6 @@ app.post('/webhook', (req, res) => {
       let senderPsid = webhookEvent.sender.id;
       console.log('Sender PSID: ' + senderPsid);
 
-// const completion = await openai.createCompletion({
-//   model: "text-davinci-003",
-//   prompt: "Hello world",
-// });
-// console.log(completion.data.choices[0].text);
-
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhookEvent.message) {
@@ -165,36 +159,12 @@ function handleMessage(senderPsid, receivedMessage) {
     };
   }
 
-
-  
+  callOpenApi();
 
   // Send the response message
   callSendAPI(senderPsid, response);
 }
 
-
-
-// Handles messaging_postbacks events
-function handlePostback(senderPsid, receivedPostback) {
-  let response;
-
-  // Get the payload for the postback
-  let payload = receivedPostback.payload;
-  console.log('payload is');
-  console.log(payload);
-
-  // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { 'text': 'Thanks!' };
-  } else if (payload === 'no') {
-    response = { 'text': 'Oops, try sending another image.' };
-  } else {
-    response = {'text': 'recevied one messageressponse back' };
-  }
-  // Send the message to acknowledge the postback
-  callOpenApi();
-  callSendAPI(senderPsid, response);
-}
 
 function callOpenApi() {
   console.log('calling open api');
@@ -247,6 +217,29 @@ function callSendAPI(senderPsid, response) {
     }
     console.log('done ');
   });
+}
+
+
+
+// Handles messaging_postbacks events
+function handlePostback(senderPsid, receivedPostback) {
+  console.log('in postback');
+  let response;
+
+  // Get the payload for the postback
+  let payload = receivedPostback.payload;
+
+  // Set the response based on the postback payload
+  if (payload === 'yes') {
+    response = { 'text': 'Thanks!' };
+  } else if (payload === 'no') {
+    response = { 'text': 'Oops, try sending another image.' };
+  } else {
+    response = {'text': 'recevied one messageressponse back' };
+  }
+  // Send the message to acknowledge the postback
+
+  callSendAPI(senderPsid, response);
 }
 
 // listen for requests :)
