@@ -188,9 +188,9 @@ async function callOpenApi(senderPsid, requestText) {
   // response = {
   //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
   // };
-  output = completion.data.choices[0].text + " for sender " + senderPsid;
-  
-  response = {
+  const output = completion.data.choices[0].text + " for sender " + senderPsid;
+
+  const response = {
     'text': output
   };
     // Send the response message
