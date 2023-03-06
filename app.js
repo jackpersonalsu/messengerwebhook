@@ -22,6 +22,11 @@
 // Use dotenv to read .env vars into Node
 require('dotenv').config();
 
+const openai = require('openai');
+const openai_api_key = process.env.OPENAI_API_KEY;
+
+const openai_client = new openai(openai_api_key);
+
 // Imports dependencies and set up http server
 const
   request = require('request'),
@@ -163,10 +168,17 @@ function handleMessage(senderPsid, receivedMessage) {
 // Handles messaging_postbacks events
 function handlePostback(senderPsid, receivedPostback) {
   let response;
-  console.log('response is');
-  console.log(response);
+
+
+  console.log('payload is');
+
   // Get the payload for the postback
   let payload = receivedPostback.payload;
+  console.log(payload);
+
+  console.log('open ai');
+  console.log(openai_api_key);
+  console.log(openai_client);
 
   // Set the response based on the postback payload
   if (payload === 'yes') {
@@ -205,15 +217,13 @@ function callSendAPI(senderPsid, response) {
     'json': requestBody
   }, (err, res, body) => {
     console.log('in request call back');
-    console.log(err);
-    console.log(res);
-    console.log(body);
+
     if (!err) {
       console.log('Message sent!');
     } else {
       console.error('Unable to send message:' + err);
     }
-    console.log('done poir');
+    console.log('done ');
   });
 }
 
