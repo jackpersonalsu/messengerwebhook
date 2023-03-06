@@ -175,7 +175,7 @@ function callOpenApi(senderPsid, requestText) {
     // callSendAPI(senderPsid, response);
     console.log('before sen');
     callSendAPI(senderPsid,  {
-      'text': 'whatsogonignon'
+      'text': 'whatsogonignongggg'
     });
     console.log('after sen');
   });
