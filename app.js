@@ -79,7 +79,7 @@ app.get('/webhook', (req, res) => {
 });
 
 // Creates the endpoint for your webhook
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
   let body = req.body;
 
   // Checks if this is an event from a page subscription
@@ -130,7 +130,7 @@ function handleMessage(senderPsid, receivedMessage) {
   }
 }
 
-function callOpenApi(senderPsid, requestText) {
+async function callOpenApi(senderPsid, requestText) {
   
   console.log('calling open api async v8');
   const { Configuration, OpenAIApi } = require("openai");
@@ -146,7 +146,7 @@ function callOpenApi(senderPsid, requestText) {
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
-  console.log('after call await v16');
+  console.log('after call await v18');
   completion.then(async (result) => {
     console.log('data v15');
     const data = result.data;
@@ -168,12 +168,12 @@ function callOpenApi(senderPsid, requestText) {
     console.log('sending');
     console.log(output);
 
-    callSendAPI(senderPsid, response);
+    await callSendAPI(senderPsid, response);
   });
 }
 
 // Sends response messages via the Send API
-function callSendAPI(senderPsid, response) {
+async function callSendAPI(senderPsid, response) {
   console.log("in call send API, changing message");
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -189,7 +189,7 @@ function callSendAPI(senderPsid, response) {
   console.log(requestBody);
 
   // Send the HTTP request to the Messenger Platform
-  request({
+  await request({
     'uri': 'https://graph.facebook.com/v2.6/me/messages',
     'qs': { 'access_token': PAGE_ACCESS_TOKEN },
     'method': 'POST',
