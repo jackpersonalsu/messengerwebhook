@@ -25,7 +25,6 @@ require('dotenv').config();
 const openai = require('openai');
 const openai_api_key = process.env.OPENAI_API_KEY;
 
-
 // Imports dependencies and set up http server
 const
   request = require('request'),
@@ -96,11 +95,23 @@ app.post('/webhook', (req, res) => {
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
       console.log('Sender PSID: ' + senderPsid);
-      console.log('open ai');
-      console.log(openai_api_key);
-      const openai_client = new openai(openai_api_key);
-    
-      console.log(openai_client);
+
+      console.log('open ai 000');
+      const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+console.log('open ai 110');
+const openai = new OpenAIApi(configuration);
+console.log('open ai 111');
+  console.log(openai);
+
+// const completion = await openai.createCompletion({
+//   model: "text-davinci-003",
+//   prompt: "Hello world",
+// });
+// console.log(completion.data.choices[0].text);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
