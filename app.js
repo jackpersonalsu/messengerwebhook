@@ -122,7 +122,7 @@ function handleMessage(senderPsid, receivedMessage) {
   // Checks if the message contains text
   if (receivedMessage.text) {
     // callOpenApi(senderPsid, receivedMessage.text);
-    callSendAPI(attachmentUrl,  {
+    callSendAPI(senderPsid,  {
       'text': 'whatsogonig'
     });
   } else if (receivedMessage.attachments) {
