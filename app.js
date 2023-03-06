@@ -173,11 +173,11 @@ function callOpenApi(senderPsid, requestText) {
     // console.log('calling callSeender');
       // Send the response message
     // callSendAPI(senderPsid, response);
-    console.log('before sen');
+    console.log('before sen aa');
     callSendAPI(senderPsid,  {
-      'text': 'whatsogonignongggg'
+      'text': 'whatsogonignonggggtttt'
     });
-    console.log('after sen');
+    console.log('after sen aaa');
   });
 }
 
