@@ -123,8 +123,6 @@ function handleMessage(senderPsid, receivedMessage) {
   // Checks if the message contains text
   if (receivedMessage.text) {
     console.log('text is ' + receivedMessage.text);
-    // Create the payload for a basic text message, which
-    // will be added to the body of your request to the Send API
     response = {
       'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
     };
@@ -166,22 +164,21 @@ function handleMessage(senderPsid, receivedMessage) {
 }
 
 
-function callOpenApi() {
-  console.log('calling open api');
-
-  console.log('open ai tttg000');
+async function callOpenApi() {
+  
+  console.log('calling open api async');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
   });
-  console.log('open aigg 110');
   const openai = new OpenAIApi(configuration);
-
-
-  console.log('open aigg 111');
-  console.log(openai);
-
+  
+  const completion = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: "Hello world from jacksu",
+  });
+  console.log(completion.data.choices[0].text);
 }
 
 // Sends response messages via the Send API
@@ -189,7 +186,6 @@ function callSendAPI(senderPsid, response) {
   console.log("in call send API, changing message");
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-  // const PAGE_ACCESS_TOKEN = '';
 
   // Construct the message body
   let requestBody = {
