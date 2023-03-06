@@ -11,6 +11,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "nodemon": "^2.0.21",
+    "openai": "^3.2.1",
     "request": "^2.88.0",
     "supervisor": "^0.12.0"
   },
