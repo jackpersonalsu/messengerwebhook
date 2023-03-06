@@ -121,10 +121,10 @@ function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    // callOpenApi(senderPsid, receivedMessage.text);
-    callSendAPI(senderPsid,  {
-      'text': 'whatsogonig'
-    });
+    callOpenApi(senderPsid, receivedMessage.text);
+    // callSendAPI(senderPsid,  {
+    //   'text': 'whatsogonig'
+    // });
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
     let attachmentUrl = receivedMessage.attachments[0].payload.url;
@@ -150,29 +150,32 @@ function callOpenApi(senderPsid, requestText) {
   });
   console.log('after call await v8');
   completion.then((result) => {
-    console.log('data v10');
-    const data = result.data;
-    console.log('data v10');
-    console.log(data);
-    console.log('data data');
-    console.log(data.data);
-    console.log('choice');
-    console.log(data.choices[0].text);
+    // console.log('data v10');
+    // const data = result.data;
+    // console.log('data v10');
+    // console.log(data);
+    // console.log('data data');
+    // console.log(data.data);
+    // console.log('choice');
+    // console.log(data.choices[0].text);
   
-    console.log('text is ' + requestText);
-    console.log('response is' + data.choices[0].text);
-    // response = {
-    //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
+    // console.log('text is ' + requestText);
+    // console.log('response is' + data.choices[0].text);
+    // // response = {
+    // //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
+    // // };
+    // const output =data.choices[0].text + " for sender " + senderPsid;
+  
+    // const response = {
+    //   'text': output
     // };
-    const output =data.choices[0].text + " for sender " + senderPsid;
-  
-    const response = {
-      'text': output
-    };
-    console.log(response);
-    console.log('calling callSeender');
+    // console.log(response);
+    // console.log('calling callSeender');
       // Send the response message
-    callSendAPI(senderPsid, response);
+    // callSendAPI(senderPsid, response);
+        callSendAPI(senderPsid,  {
+      'text': 'whatsogonignon'
+    });
   });
 }
 
