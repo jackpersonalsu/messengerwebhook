@@ -122,10 +122,8 @@ function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    console.log('text is ' + receivedMessage.text);
-    response = {
-      'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
-    };
+    callOpenApi(receivedMessage.text);
+   
   } else if (receivedMessage.attachments) {
 
     // Get the URL of the message attachment
@@ -157,14 +155,13 @@ function handleMessage(senderPsid, receivedMessage) {
     };
   }
 
-  callOpenApi();
 
-  // Send the response message
-  callSendAPI(senderPsid, response);
+
+
 }
 
 
-async function callOpenApi() {
+async function callOpenApi(senderPsid, response) {
   
   console.log('calling open api async');
   const { Configuration, OpenAIApi } = require("openai");
@@ -172,17 +169,28 @@ async function callOpenApi() {
   const configuration = new Configuration({
    apiKey: process.env.OPENAI_API_KEY,
   });
+  
   console.log('openai key' + configuration);
   
   const openai = new OpenAIApi(configuration);
   
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: "Hello world from jacksu",
+    prompt: "Please reply to the following: " + receivedMessage.text,
   });
   console.log('after call await');
   console.log(completion.data);
   console.log(completion.data.choices[0].text);
+
+  console.log('text is ' + receivedMessage.text);
+  // response = {
+  //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
+  // };
+  response = {
+    'text': `Hello from chatbot: '${receivedMessage.text}' for ${senderPsid}`
+  };
+    // Send the response message
+  callSendAPI(senderPsid, response);
 }
 
 // Sends response messages via the Send API
