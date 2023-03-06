@@ -147,8 +147,8 @@ function callOpenApi(senderPsid, requestText) {
     prompt: "Please reply to the following: " + requestText,
   });
   console.log('after call await v8');
-  completion.then((result) => {
-    console.log('data v12');
+  completion.then(async (result) => {
+    console.log('data v15');
     const data = result.data;
 
     console.log('choice');
