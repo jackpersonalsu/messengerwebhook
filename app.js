@@ -79,7 +79,7 @@ app.get('/webhook', (req, res) => {
 });
 
 // Creates the endpoint for your webhook
-app.post('/webhook', async (req, res) => {
+app.post('/webhook', (req, res) => {
   let body = req.body;
 
   // Checks if this is an event from a page subscription
@@ -115,7 +115,7 @@ app.post('/webhook', async (req, res) => {
 });
 
 // Handles messages events
-async function handleMessage(senderPsid, receivedMessage) {
+function handleMessage(senderPsid, receivedMessage) {
   let response;
   console.log("in handeMessage v6:");
 
@@ -129,7 +129,7 @@ async function handleMessage(senderPsid, receivedMessage) {
   }
 }
 
-async function callOpenApi(senderPsid, requestText) {
+function callOpenApi(senderPsid, requestText) {
   
   console.log('calling open api async v7');
   const { Configuration, OpenAIApi } = require("openai");
