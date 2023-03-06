@@ -142,34 +142,33 @@ async function callOpenApi(senderPsid, requestText) {
   const openai = new OpenAIApi(configuration);
   console.log('calimg open ai v11');
 
-  const completion = openai.createCompletion({
+  const completion = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
-  console.log('after call await v18');
-  completion.then(async (result) => {
-    console.log('data v15');
-    const data = result.data;
 
-    console.log('choice');
-    console.log(data.choices[0].text);
+  console.log('data v19');
+  const data = completion.data;
+
+  console.log('choice');
+  console.log(data.choices[0].text);
+
+  // console.log('text is ' + requestText);
+  // console.log('response is' + data.choices[0].text);
+  // // response = {
+  // //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
+  // // };
+  const output =data.choices[0].text + " for sender " + senderPsid;
   
-    // console.log('text is ' + requestText);
-    // console.log('response is' + data.choices[0].text);
-    // // response = {
-    // //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
-    // // };
-    const output =data.choices[0].text + " for sender " + senderPsid;
-   
-    const response = {
-      'text': output
-    };
+  const response = {
+    'text': output
+  };
 
-    console.log('sending');
-    console.log(output);
+  console.log('sending');
+  console.log(output);
 
-    await callSendAPI(senderPsid, response);
-  });
+  await callSendAPI(senderPsid, response);
+
 }
 
 // Sends response messages via the Send API
