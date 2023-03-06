@@ -121,7 +121,10 @@ function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    callOpenApi(senderPsid, receivedMessage.text);
+    // callOpenApi(senderPsid, receivedMessage.text);
+    callSendAPI(attachmentUrl,  {
+      'text': 'whatsogonig'
+    });
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
     let attachmentUrl = receivedMessage.attachments[0].payload.url;
@@ -139,7 +142,7 @@ function callOpenApi(senderPsid, requestText) {
   });
     
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v8');
+  console.log('calimg open ai v10');
 
   const completion = openai.createCompletion({
     model: "text-davinci-003",
