@@ -193,6 +193,8 @@ async function callOpenApi(senderPsid, requestText) {
   const response = {
     'text': output
   };
+  console.log(response);
+  console.log('calling callSeender');
     // Send the response message
   callSendAPI(senderPsid, response);
 }
