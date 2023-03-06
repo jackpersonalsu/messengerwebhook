@@ -139,16 +139,16 @@ function callOpenApi(senderPsid, requestText) {
   });
     
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai');
+  console.log('calimg open ai v8');
 
   const completion = openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
-  console.log('after call await');
+  console.log('after call await v8');
   Promise.resolve(completion).then((result) => {
     data = result;
-    console.log('data ');
+    console.log('data v8');
     console.log(data);
     console.log(data.choices[0].text);
   
