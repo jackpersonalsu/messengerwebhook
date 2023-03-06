@@ -25,7 +25,6 @@ require('dotenv').config();
 const openai = require('openai');
 const openai_api_key = process.env.OPENAI_API_KEY;
 
-const openai_client = new openai(openai_api_key);
 
 // Imports dependencies and set up http server
 const
@@ -178,6 +177,8 @@ function handlePostback(senderPsid, receivedPostback) {
 
   console.log('open ai');
   console.log(openai_api_key);
+  const openai_client = new openai(openai_api_key);
+
   console.log(openai_client);
 
   // Set the response based on the postback payload
