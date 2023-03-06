@@ -140,7 +140,7 @@ function callOpenApi(senderPsid, requestText) {
   });
     
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v10');
+  console.log('calimg open ai v11');
 
   const completion = openai.createCompletion({
     model: "text-davinci-003",
