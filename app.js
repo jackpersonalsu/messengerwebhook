@@ -218,7 +218,7 @@ async function callSendAPI(senderPsid, response) {
 
 
 // Handles messaging_postbacks events
-function handlePostback(senderPsid, receivedPostback) {
+async function handlePostback(senderPsid, receivedPostback) {
   console.log('in postback');
   let response;
 
@@ -235,7 +235,7 @@ function handlePostback(senderPsid, receivedPostback) {
   }
   // Send the message to acknowledge the postback
 
-  callSendAPI(senderPsid, response);
+  await callSendAPI(senderPsid, response);
 }
 
 // listen for requests :)
