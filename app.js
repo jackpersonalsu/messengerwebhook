@@ -133,7 +133,7 @@ async function handleMessage(senderPsid, receivedMessage) {
     return result;
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
-    return new Promise(resolve => async () => {
+    return new Promise(resolve =>  () => {
       let attachmentUrl = receivedMessage.attachments[0].payload.url;
       callSendAPI(attachmentUrl, response);
       resolve();
