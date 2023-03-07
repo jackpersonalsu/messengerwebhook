@@ -86,7 +86,7 @@ app.post('/webhook', async (req, res) => {
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(function(entry) {
+    await body.entry.forEach(async function(entry) {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
@@ -97,7 +97,7 @@ app.post('/webhook', async (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
-        handleMessage(senderPsid, webhookEvent.message);
+        await handleMessage(senderPsid, webhookEvent.message);
       } else if (webhookEvent.postback) {
         handlePostback(senderPsid, webhookEvent.postback);
       }
@@ -113,20 +113,27 @@ app.post('/webhook', async (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(senderPsid, receivedMessage) {
+async function handleMessage(senderPsid, receivedMessage) {
   let response;
   console.log("in handeMessage v8:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    callOpenApi(senderPsid, receivedMessage.text);
-    // callSendAPI(senderPsid,  {
-    //   'text': 'whatsogonig'
-    // });
+    return new Promise(resolve => () => {
+      callOpenApi(senderPsid, receivedMessage.text);
+      resolve();
+    });
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
-    let attachmentUrl = receivedMessage.attachments[0].payload.url;
-    callSendAPI(attachmentUrl, response);
+    return new Promise(resolve => () => {
+      let attachmentUrl = receivedMessage.attachments[0].payload.url;
+      callSendAPI(attachmentUrl, response);
+      resolve();
+    });
+  } else {
+    return new Promise(resolve => () => {
+      resolve(); // donothing
+    });
   }
 }
 
@@ -188,20 +195,23 @@ async function callSendAPI(senderPsid, response) {
   console.log(requestBody);
 
   // Send the HTTP request to the Messenger Platform
-  await request({
+  return new Promise(resolve => () => {
+    request({
     'uri': 'https://graph.facebook.com/v2.6/me/messages',
     'qs': { 'access_token': PAGE_ACCESS_TOKEN },
     'method': 'POST',
     'json': requestBody
   }, (err, res, body) => {
-    console.log('in request call back');
+      console.log('in request call back');
 
-    if (!err) {
-      console.log('Message sent!');
-    } else {
-      console.error('Unable to send message:' + err);
-    }
-    console.log('done ');
+      if (!err) {
+        console.log('Message sent!');
+      } else {
+        console.error('Unable to send message:' + err);
+      }
+      console.log('done ');
+      resolve();
+    });
   });
 }
 
