@@ -118,7 +118,7 @@ app.post('/webhook', async (req, res) => {
 // Handles messages events
 async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage 20:");
+  console.log("in handeMessage 21:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
@@ -135,7 +135,7 @@ async function handleMessage(senderPsid, receivedMessage) {
     // Get the URL of the message attachment
     return new Promise(resolve => async () => {
       let attachmentUrl = receivedMessage.attachments[0].payload.url;
-      await callSendAPI(attachmentUrl, response);
+      callSendAPI(attachmentUrl, response);
       resolve();
     });
   } else {
@@ -148,42 +148,42 @@ async function handleMessage(senderPsid, receivedMessage) {
 async function callOpenApi(senderPsid, requestText) {
   
   console.log('calling open api async v21');
-  const { Configuration, OpenAIApi } = require("openai");
+  // const { Configuration, OpenAIApi } = require("openai");
 
-  const configuration = new Configuration({
-   apiKey: process.env.OPENAI_API_KEY,
-  });
+  // const configuration = new Configuration({
+  //  apiKey: process.env.OPENAI_API_KEY,
+  // });
     
-  const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v21');
+  // const openai = new OpenAIApi(configuration);
+  // console.log('calimg open ai v21');
 
-  const completion = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: "Please reply to the following: " + requestText,
-  });
+  // const completion = await openai.createCompletion({
+  //   model: "text-davinci-003",
+  //   prompt: "Please reply to the following: " + requestText,
+  // });
 
-  console.log('data v21');
-  const data = completion.data;
+  // console.log('data v21');
+  // const data = completion.data;
 
-  console.log('choice');
-  console.log(data.choices[0].text);
+  // console.log('choice');
+  // console.log(data.choices[0].text);
 
-  // console.log('text is ' + requestText);
-  // console.log('response is' + data.choices[0].text);
-  // // response = {
-  // //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
-  // // };
-  const output =data.choices[0].text + " for sender " + senderPsid;
+  // // console.log('text is ' + requestText);
+  // // console.log('response is' + data.choices[0].text);
+  // // // response = {
+  // // //   'text': `Hello from Jack Test for your origina text '${receivedMessage.text}'`
+  // // // };
+  // const output =data.choices[0].text + " for sender " + senderPsid;
   
-  const response = {
-    'text': output
-  };
+  // const response = {
+  //   'text': output
+  // };
 
-  console.log('sending 21');
-  console.log(output);
-  console.log('before call send api');
-  await callSendAPI(senderPsid, response);
-  console.log('after call api');
+  // console.log('sending 21');
+  // console.log(output);
+  // console.log('before call send api');
+  // await callSendAPI(senderPsid, response);
+  // console.log('after call api');
 }
 
 // Sends response messages via the Send API
