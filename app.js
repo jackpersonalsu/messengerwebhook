@@ -121,12 +121,13 @@ async function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    console.log("before return");
+    console.log("create resutn");
     const result = new Promise(resolve => async () => {
       await callOpenApi(senderPsid, receivedMessage.text);
       console.log('before resolve for callOpenApi');
       resolve();
     });
+    console.log('before return');
     console.log(result);
     return result;
   } else if (receivedMessage.attachments) {
