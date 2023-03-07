@@ -122,8 +122,8 @@ async function handleMessage(senderPsid, receivedMessage) {
   // Checks if the message contains text
   if (receivedMessage.text) {
     console.log("before return");
-    const result = new Promise(resolve => () => {
-      callOpenApi(senderPsid, receivedMessage.text);
+    const result = new Promise(resolve => async () => {
+      await callOpenApi(senderPsid, receivedMessage.text);
       console.log('before resolve for callOpenApi');
       resolve();
     });
@@ -131,9 +131,9 @@ async function handleMessage(senderPsid, receivedMessage) {
     return result;
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
-    return new Promise(resolve => () => {
+    return new Promise(resolve => async () => {
       let attachmentUrl = receivedMessage.attachments[0].payload.url;
-      callSendAPI(attachmentUrl, response);
+      await callSendAPI(attachmentUrl, response);
       resolve();
     });
   } else {
