@@ -97,6 +97,7 @@ app.post('/webhook', async (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
+        console.log('before goto message');
         await handleMessage(senderPsid, webhookEvent.message);
         console.log('handleMessage done ' + webhookEvent.message);
       } else if (webhookEvent.postback) {
@@ -120,11 +121,14 @@ async function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    return new Promise(resolve => () => {
+    console.log("before return");
+    const result = new Promise(resolve => () => {
       callOpenApi(senderPsid, receivedMessage.text);
       console.log('before resolve for callOpenApi');
       resolve();
     });
+    console.log(result);
+    return result;
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
     return new Promise(resolve => () => {
