@@ -98,6 +98,7 @@ app.post('/webhook', async (req, res) => {
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
         await handleMessage(senderPsid, webhookEvent.message);
+        console.log('handleMessage done ' + webhookEvent.message);
       } else if (webhookEvent.postback) {
         handlePostback(senderPsid, webhookEvent.postback);
       }
@@ -115,12 +116,13 @@ app.post('/webhook', async (req, res) => {
 // Handles messages events
 async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage v8:");
+  console.log("in handeMessage 20:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
     return new Promise(resolve => () => {
       callOpenApi(senderPsid, receivedMessage.text);
+      console.log('before resolve for callOpenApi');
       resolve();
     });
   } else if (receivedMessage.attachments) {
@@ -139,7 +141,7 @@ async function handleMessage(senderPsid, receivedMessage) {
 
 async function callOpenApi(senderPsid, requestText) {
   
-  console.log('calling open api async v8');
+  console.log('calling open api async v20');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
@@ -147,7 +149,7 @@ async function callOpenApi(senderPsid, requestText) {
   });
     
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v11');
+  console.log('calimg open ai v20');
 
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
