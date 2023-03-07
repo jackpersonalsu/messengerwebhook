@@ -98,8 +98,9 @@ app.post('/webhook', async (req, res) => {
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
         console.log('before goto message');
-        await handleMessage(senderPsid, webhookEvent.message);
+        const msgResult = await handleMessage(senderPsid, webhookEvent.message);
         console.log('handleMessage done ' + webhookEvent.message);
+        console.log(msgResult);
       } else if (webhookEvent.postback) {
         handlePostback(senderPsid, webhookEvent.postback);
       }
