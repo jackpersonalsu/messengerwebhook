@@ -146,7 +146,7 @@ async function handleMessage(senderPsid, receivedMessage) {
 
 async function callOpenApi(senderPsid, requestText) {
   
-  console.log('calling open api async v20');
+  console.log('calling open api async v21');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
@@ -154,14 +154,14 @@ async function callOpenApi(senderPsid, requestText) {
   });
     
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v20');
+  console.log('calimg open ai v21');
 
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
 
-  console.log('data v19');
+  console.log('data v21');
   const data = completion.data;
 
   console.log('choice');
@@ -178,11 +178,11 @@ async function callOpenApi(senderPsid, requestText) {
     'text': output
   };
 
-  console.log('sending');
+  console.log('sending 21');
   console.log(output);
-
+  console.log('before call send api');
   await callSendAPI(senderPsid, response);
-
+  console.log('after call api');
 }
 
 // Sends response messages via the Send API
