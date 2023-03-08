@@ -45,7 +45,8 @@ app.post('/webhook', (req, res) => {
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
         console.log('before goto message');
         const msgResult = handleMessage(senderPsid, webhookEvent.message);
-        console.log('handleMessage done ' + webhookEvent.message);
+        console.log('handleMessage output');
+        console.log(webhookEvent.message);
         console.log(msgResult);
       } else if (webhookEvent.postback) {
         handlePostback(senderPsid, webhookEvent.postback);
@@ -101,9 +102,9 @@ async function callOpenApi(senderPsid, requestText) {
     prompt: `Is openai free?`
   });
 
-  console.log('data v30');
+  console.log('data v31');
   console.log(action);
-  const completion = await action();
+  const completion = await action;
 
   console.log('after await');
   console.log(completion);
