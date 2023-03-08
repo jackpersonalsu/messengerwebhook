@@ -155,7 +155,7 @@ function callSendAPI(senderPsid, response) {
     console.log('done ');
     resolve();
   });
-
+}
 
 
 
@@ -231,7 +231,6 @@ app.get('/webhook', (req, res) => {
 
   // Checks if a token and mode is in the query string of the request
   if (mode && token) {
-
     // Checks the mode and token sent is correct
     if (mode === 'subscribe') {//} && token === VERIFY_TOKEN) {
 
