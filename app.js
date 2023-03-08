@@ -74,6 +74,7 @@ async function handleMessage(senderPsid, receivedMessage) {
       console.log('before resolve for callOpenApi');
       resolve();
     });
+    await result;
     console.log('before return');
     console.log(result);
     return result;
