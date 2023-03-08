@@ -93,12 +93,13 @@ async function callOpenApi(senderPsid, requestText) {
   const openai = new OpenAIApi(configuration);
   console.log('calimg open ai v25');
 
-  const completion = await openai.createCompletion({
+  const completion = openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
 
   console.log('data v25');
+  console.log(completion);
   const data = completion.data;
 
   console.log('choice');
