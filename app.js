@@ -91,14 +91,16 @@ async function callOpenApi(senderPsid, requestText) {
   
   console.log('before call openai api');
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v27');
+  console.log('calimg open ai v28');
+  const prompt = "Please reply to the following: " + requestText;
+  console.log(requestText);
 
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: "Please reply to the following: " + requestText,
+    prompt: `Is openai free?`
   });
 
-  console.log('data v25');
+  console.log('data v28');
   console.log(completion);
   const data = completion.data;
 
