@@ -96,12 +96,16 @@ async function callOpenApi(senderPsid, requestText) {
   console.log(requestText);
   console.log(openai);
 
-  const completion =  openai.createCompletion({
+  const action =  openai.createCompletion({
     model: "text-davinci-003",
     prompt: `Is openai free?`
   });
 
-  console.log('data v29');
+  console.log('data v30');
+  console.log(action);
+  const completion = await action;
+
+  console.log('after await');
   console.log(completion);
   // const data = completion.data;
 
