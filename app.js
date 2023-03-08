@@ -81,27 +81,28 @@ function handleMessage(senderPsid, receivedMessage) {
   }
 }
 
-function callOpenApi(senderPsid, requestText) {
+async function callOpenApi(senderPsid, requestText) {
   console.log('calling open api async v23');
-  // const { Configuration, OpenAIApi } = require("openai");
+  const { Configuration, OpenAIApi } = require("openai");
 
-  // const configuration = new Configuration({
-  //  apiKey: process.env.OPENAI_API_KEY,
-  // });
-    
-  // const openai = new OpenAIApi(configuration);
-  // console.log('calimg open ai v21');
+  const configuration = new Configuration({
+   apiKey: process.env.OPENAI_API_KEY,
+  });
+  
+  console.log('before call openai api');
+  const openai = new OpenAIApi(configuration);
+  console.log('calimg open ai v21');
 
-  // const completion = await openai.createCompletion({
-  //   model: "text-davinci-003",
-  //   prompt: "Please reply to the following: " + requestText,
-  // });
+  const completion = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: "Please reply to the following: " + requestText,
+  });
 
-  // console.log('data v21');
-  // const data = completion.data;
+  console.log('data v21');
+  const data = completion.data;
 
-  // console.log('choice');
-  // console.log(data.choices[0].text);
+  console.log('choice');
+  console.log(data.choices[0].text);
 
   // // console.log('text is ' + requestText);
   // // console.log('response is' + data.choices[0].text);
