@@ -82,7 +82,7 @@ function handleMessage(senderPsid, receivedMessage) {
 }
 
 async function callOpenApi(senderPsid, requestText) {
-  console.log('calling open api async v26');
+  console.log('calling open api async v27');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
@@ -91,9 +91,9 @@ async function callOpenApi(senderPsid, requestText) {
   
   console.log('before call openai api');
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v26');
+  console.log('calimg open ai v27');
 
-  const completion = openai.createCompletion({
+  const completion = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: "Please reply to the following: " + requestText,
   });
