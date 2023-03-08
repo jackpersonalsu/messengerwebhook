@@ -1,22 +1,3 @@
-/**
- * Copyright 2021-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Messenger Platform Quick Start Tutorial
- *
- * This is the completed code for the Messenger Platform quick start tutorial
- *
- * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
- *
- * To run this code, you must do the following:
- *
- * 1. Deploy this code to a server running Node.js
- * 2. Run `yarn install`
- * 3. Add your VERIFY_TOKEN and PAGE_ACCESS_TOKEN to your environment vars
- */
-
 'use strict';
 
 // Use dotenv to read .env vars into Node
@@ -41,41 +22,6 @@ app.use(json());
 // Respond with 'Hello World' when a GET request is made to the homepage
 app.get('/', function (_req, res) {
   res.send('Hello World from jacksu v2');
-});
-
-// Adds support for GET requests to our webhook
-app.get('/webhook', (req, res) => {
-
-  // Your verify token. Should be a random string.
-  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-
-  // Parse the query params
-  let mode = req.query['hub.mode'];
-  let token = req.query['hub.verify_token'];
-  // let token = VERIFY_TOKEN;
-  let challenge = req.query['hub.challenge'];
-  console.log(mode);
-  // console.log(token);
-  console.log(challenge);
-
-  // Checks if a token and mode is in the query string of the request
-  if (mode && token) {
-
-    // Checks the mode and token sent is correct
-    if (mode === 'subscribe') {//} && token === VERIFY_TOKEN) {
-
-      // Responds with the challenge token from the request
-      console.log('WEBHOOK_VERIFIED');
-      res.status(200).send(challenge);
-
-    } else {
-      // Responds with '403 Forbidden' if verify tokens do not match
-      res.sendStatus(403);
-    }
-  } else {
-    // Responds with '403 Forbidden' if verify tokens do not match
-    res.sendStatus(404);
-  }
 });
 
 // Creates the endpoint for your webhook
@@ -118,7 +64,7 @@ app.post('/webhook', async (req, res) => {
 // Handles messages events
 async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage 21:");
+  console.log("in handeMessage 22:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
@@ -146,8 +92,7 @@ async function handleMessage(senderPsid, receivedMessage) {
 }
 
 async function callOpenApi(senderPsid, requestText) {
-  
-  console.log('calling open api async v21');
+  console.log('calling open api async v22');
   // const { Configuration, OpenAIApi } = require("openai");
 
   // const configuration = new Configuration({
@@ -278,3 +223,39 @@ function sendAttachment(attachmentUrl, senderPsid) {
     }
   };
 }
+
+
+// Adds support for GET requests to our webhook
+app.get('/webhook', (req, res) => {
+
+  // Your verify token. Should be a random string.
+  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
+  // Parse the query params
+  let mode = req.query['hub.mode'];
+  let token = req.query['hub.verify_token'];
+  // let token = VERIFY_TOKEN;
+  let challenge = req.query['hub.challenge'];
+  console.log(mode);
+  // console.log(token);
+  console.log(challenge);
+
+  // Checks if a token and mode is in the query string of the request
+  if (mode && token) {
+
+    // Checks the mode and token sent is correct
+    if (mode === 'subscribe') {//} && token === VERIFY_TOKEN) {
+
+      // Responds with the challenge token from the request
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
+
+    } else {
+      // Responds with '403 Forbidden' if verify tokens do not match
+      res.sendStatus(403);
+    }
+  } else {
+    // Responds with '403 Forbidden' if verify tokens do not match
+    res.sendStatus(404);
+  }
+});
