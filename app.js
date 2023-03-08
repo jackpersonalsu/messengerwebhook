@@ -69,10 +69,10 @@ function handleMessage(senderPsid, receivedMessage) {
 
   // Checks if the message contains text
   if (receivedMessage.text) {
-    console.log("create resutn");
+    console.log("before call callOpenApi");
 
     callOpenApi(senderPsid, receivedMessage.text);
-    console.log('after resolve for callOpenApi');
+    console.log('after call callOpenApi');
 
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
