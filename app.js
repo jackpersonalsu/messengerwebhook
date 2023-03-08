@@ -103,7 +103,7 @@ async function callOpenApi(senderPsid, requestText) {
 
   console.log('data v30');
   console.log(action);
-  const completion = await action;
+  const completion = await action();
 
   console.log('after await');
   console.log(completion);
