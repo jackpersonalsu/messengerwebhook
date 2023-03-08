@@ -25,14 +25,14 @@ app.get('/', function (_req, res) {
 });
 
 // Creates the endpoint for your webhook
-app.post('/webhook', async (req, res) => {
+app.post('/webhook', (req, res) => {
   let body = req.body;
 
   // Checks if this is an event from a page subscription
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    await body.entry.forEach(async function(entry) {
+    body.entry.forEach(function(entry) {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
@@ -44,7 +44,7 @@ app.post('/webhook', async (req, res) => {
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
         console.log('before goto message');
-        const msgResult = await handleMessage(senderPsid, webhookEvent.message);
+        const msgResult = handleMessage(senderPsid, webhookEvent.message);
         console.log('handleMessage done ' + webhookEvent.message);
         console.log(msgResult);
       } else if (webhookEvent.postback) {
@@ -62,38 +62,27 @@ app.post('/webhook', async (req, res) => {
 });
 
 // Handles messages events
-async function handleMessage(senderPsid, receivedMessage) {
+function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage 22:");
+  console.log("in handeMessage 23:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
     console.log("create resutn");
-    const result = new Promise(resolve => async () => {
-      await callOpenApi(senderPsid, receivedMessage.text);
-      console.log('before resolve for callOpenApi');
-      resolve();
-    });
-    await result;
-    console.log('before return');
-    console.log(result);
-    return result;
+
+    callOpenApi(senderPsid, receivedMessage.text);
+    console.log('after resolve for callOpenApi');
+
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
-    return new Promise(resolve =>  () => {
-      let attachmentUrl = receivedMessage.attachments[0].payload.url;
-      callSendAPI(attachmentUrl, response);
-      resolve();
-    });
-  } else {
-    return new Promise(resolve => () => {
-      resolve(); // donothing
-    });
+
+    let attachmentUrl = receivedMessage.attachments[0].payload.url;
+    callSendAPI(attachmentUrl, response);
   }
 }
 
-async function callOpenApi(senderPsid, requestText) {
-  console.log('calling open api async v22');
+function callOpenApi(senderPsid, requestText) {
+  console.log('calling open api async v23');
   // const { Configuration, OpenAIApi } = require("openai");
 
   // const configuration = new Configuration({
@@ -133,7 +122,7 @@ async function callOpenApi(senderPsid, requestText) {
 }
 
 // Sends response messages via the Send API
-async function callSendAPI(senderPsid, response) {
+function callSendAPI(senderPsid, response) {
   console.log("in call send API, changing message");
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -149,30 +138,29 @@ async function callSendAPI(senderPsid, response) {
   console.log(requestBody);
 
   // Send the HTTP request to the Messenger Platform
-  return new Promise(resolve => () => {
-    request({
-    'uri': 'https://graph.facebook.com/v2.6/me/messages',
-    'qs': { 'access_token': PAGE_ACCESS_TOKEN },
-    'method': 'POST',
-    'json': requestBody
-  }, (err, res, body) => {
-      console.log('in request call back');
 
-      if (!err) {
-        console.log('Message sent!');
-      } else {
-        console.error('Unable to send message:' + err);
-      }
-      console.log('done ');
-      resolve();
-    });
+  request({
+  'uri': 'https://graph.facebook.com/v2.6/me/messages',
+  'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+  'method': 'POST',
+  'json': requestBody
+}, (err, res, body) => {
+    console.log('in request call back');
+
+    if (!err) {
+      console.log('Message sent!');
+    } else {
+      console.error('Unable to send message:' + err);
+    }
+    console.log('done ');
+    resolve();
   });
-}
+
 
 
 
 // Handles messaging_postbacks events
-async function handlePostback(senderPsid, receivedPostback) {
+function handlePostback(senderPsid, receivedPostback) {
   console.log('in postback');
   let response;
 
@@ -189,7 +177,7 @@ async function handlePostback(senderPsid, receivedPostback) {
   }
   // Send the message to acknowledge the postback
 
-  await callSendAPI(senderPsid, response);
+  callSendAPI(senderPsid, response);
 }
 
 // listen for requests :)
