@@ -82,7 +82,7 @@ function handleMessage(senderPsid, receivedMessage) {
 }
 
 async function callOpenApi(senderPsid, requestText) {
-  console.log('calling open api async v27');
+  console.log('calling open api async v29');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
@@ -95,17 +95,17 @@ async function callOpenApi(senderPsid, requestText) {
   const prompt = "Please reply to the following: " + requestText;
   console.log(requestText);
 
-  const completion = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: `Is openai free?`
-  });
+  // const completion = await openai.createCompletion({
+  //   model: "text-davinci-003",
+  //   prompt: `Is openai free?`
+  // });
 
   console.log('data v28');
-  console.log(completion);
-  const data = completion.data;
+  // console.log(completion);
+  // const data = completion.data;
 
-  console.log('choice');
-  console.log(data.choices[0].text);
+  // console.log('choice');
+  // console.log(data.choices[0].text);
 
   // // console.log('text is ' + requestText);
   // // console.log('response is' + data.choices[0].text);
