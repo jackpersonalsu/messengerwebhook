@@ -32,7 +32,7 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(function(entry) {
+    body.entry.forEach(async function(entry) {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
@@ -44,7 +44,7 @@ app.post('/webhook', (req, res) => {
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
         console.log('before goto message');
-        const msgResult = handleMessage(senderPsid, webhookEvent.message);
+        const msgResult = await handleMessage(senderPsid, webhookEvent.message);
         console.log('handleMessage output');
         console.log(webhookEvent.message);
         console.log(msgResult);
@@ -65,7 +65,7 @@ app.post('/webhook', (req, res) => {
 // Handles messages events
 async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage 25:");
+  console.log("in handeMessage 26:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
