@@ -32,7 +32,7 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(async function(entry) {
+    body.entry.forEach(function(entry) {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
@@ -44,7 +44,7 @@ app.post('/webhook', (req, res) => {
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
         console.log('before goto message');
-        const msgResult = await handleMessage(senderPsid, webhookEvent.message);
+        const msgResult = handleMessage(senderPsid, webhookEvent.message);
         console.log('handleMessage output');
         console.log(webhookEvent.message);
         console.log(msgResult);
@@ -103,11 +103,11 @@ function callOpenApi(senderPsid, requestText) {
   console.log(requestObj);
   const action =  openai.createCompletion(requestObj);
 
-  console.log('data v32');
+  console.log('data v35');
   console.log(action);
-  console.log('before await');
+  console.log('before then');
   action.then((val) => {
-    console.log("in then");
+    console.log("inininin then");
     console.log(val);
   });
 
