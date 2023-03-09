@@ -63,7 +63,7 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-async function handleMessage(senderPsid, receivedMessage) {
+function handleMessage(senderPsid, receivedMessage) {
   let response;
   console.log("in handeMessage 26:");
 
@@ -71,7 +71,7 @@ async function handleMessage(senderPsid, receivedMessage) {
   if (receivedMessage.text) {
     console.log("before call callOpenApi");
 
-    await callOpenApi(senderPsid, receivedMessage.text);
+    callOpenApi(senderPsid, receivedMessage.text);
     console.log('after call callOpenApi');
 
   } else if (receivedMessage.attachments) {
@@ -82,8 +82,8 @@ async function handleMessage(senderPsid, receivedMessage) {
   }
 }
 
-async function callOpenApi(senderPsid, requestText) {
-  console.log('calling open api async v29');
+function callOpenApi(senderPsid, requestText) {
+  console.log('calling open api async v30');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
@@ -92,7 +92,7 @@ async function callOpenApi(senderPsid, requestText) {
   
   console.log('before call openai api');
   const openai = new OpenAIApi(configuration);
-  console.log('calimg open ai v28');
+  console.log('calimg open ai v30');
   const prompt = "Please reply to the following: " + requestText;
   console.log(requestText);
   // console.log(openai);
@@ -106,10 +106,13 @@ async function callOpenApi(senderPsid, requestText) {
   console.log('data v32');
   console.log(action);
   console.log('before await');
-  const completion = await action;
+  action.then((val) => {
+    console.log("in then");
+    console.log(val);
+  });
 
-  console.log('after await');
-  console.log(completion);
+  // console.log('after await');
+  // console.log(completion);
   // const data = completion.data;
 
   // console.log('choice');
