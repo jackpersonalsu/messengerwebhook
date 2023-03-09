@@ -63,15 +63,15 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(senderPsid, receivedMessage) {
+async function handleMessage(senderPsid, receivedMessage) {
   let response;
-  console.log("in handeMessage 23:");
+  console.log("in handeMessage 25:");
 
   // Checks if the message contains text
   if (receivedMessage.text) {
     console.log("before call callOpenApi");
 
-    callOpenApi(senderPsid, receivedMessage.text);
+    await callOpenApi(senderPsid, receivedMessage.text);
     console.log('after call callOpenApi');
 
   } else if (receivedMessage.attachments) {
