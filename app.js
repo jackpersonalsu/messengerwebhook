@@ -131,6 +131,7 @@ async function callOpenApi(senderPsid, requestText) {
   // console.log('before call send api');
   // await callSendAPI(senderPsid, response);
   // console.log('after call api');
+  return;
 }
 
 // Sends response messages via the Send API
