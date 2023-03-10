@@ -104,7 +104,7 @@ async function callOpenApi(senderPsid, requestText) {
   const action =  openai.createCompletion(requestObj);
   action.then((val) => {
     console.log("iiiinside then");
-    // resolve();
+    resolve();
   });
   console.log('after then');
   // console.log('after await');
