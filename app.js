@@ -82,7 +82,7 @@ function handleMessage(senderPsid, receivedMessage) {
   }
 }
 
-function callOpenApi(senderPsid, requestText) {
+async function callOpenApi(senderPsid, requestText) {
   console.log('calling open api async v30');
   const { Configuration, OpenAIApi } = require("openai");
 
@@ -106,10 +106,9 @@ function callOpenApi(senderPsid, requestText) {
   console.log('data v36');
   console.log(action);
   console.log('before then');
-  action.then((val) => {
-    console.log("inininin then");
+  await action.then((val) => {
+    console.log("insude then");
     console.log(val);
-    resolve();
   });
 
   // console.log('after await');
