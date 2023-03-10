@@ -107,12 +107,13 @@ async function callOpenApi(senderPsid, requestText) {
   console.log(action);
   console.log('before then v2');
   action.then((val) => {
-  console.log("inside then");
+    console.log("inside then");
     const response = {
       'text': 'text output'
     };
     console.log(val);
-    callSendAPI(senderPsid, response);
+    const output = callSendAPI(senderPsid, response);
+    console.log(output);
     resolve();
   });
   console.log('after then');
@@ -144,7 +145,7 @@ async function callOpenApi(senderPsid, requestText) {
 
 // Sends response messages via the Send API
 function callSendAPI(senderPsid, response) {
-  console.log("in call send API, changing message");
+  console.log("callSendAPIcallSendAPIin call send API, changing message");
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
