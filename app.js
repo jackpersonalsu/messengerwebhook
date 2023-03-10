@@ -32,7 +32,7 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(function(entry) {
+    body.entry.forEach(async function(entry) {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
@@ -43,9 +43,9 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhookEvent.message && webhookEvent.recipient.id === '105907225783056') {
-        console.log('before goto message');
-        const msgResult = handleMessage(senderPsid, webhookEvent.message);
-        console.log('handleMessage output');
+        console.log('before handleMessage');
+        const msgResult = await handleMessage(senderPsid, webhookEvent.message);
+        console.log('after handleMessage');
         console.log(webhookEvent.message);
         console.log(msgResult);
       } else if (webhookEvent.postback) {
@@ -71,14 +71,14 @@ async function handleMessage(senderPsid, receivedMessage) {
   if (receivedMessage.text) {
     console.log("before call callOpenApi");
 
-    callOpenApi(senderPsid, receivedMessage.text);
+    await callOpenApi(senderPsid, receivedMessage.text);
     console.log('after call callOpenApi');
 
   } else if (receivedMessage.attachments) {
     // Get the URL of the message attachment
 
     let attachmentUrl = receivedMessage.attachments[0].payload.url;
-    callSendAPI(attachmentUrl, response);
+    await callSendAPI(attachmentUrl, response);
   }
 }
 
@@ -105,7 +105,7 @@ async function callOpenApi(senderPsid, requestText) {
 
   console.log('data v40');
   console.log(action);
-  console.log('before then v3');
+  console.log('before then v5');
   await action.then((val) => {
     console.log("iiiinside then");
     const response = {
