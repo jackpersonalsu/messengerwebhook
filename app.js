@@ -63,7 +63,7 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(senderPsid, receivedMessage) {
+async function handleMessage(senderPsid, receivedMessage) {
   let response;
   console.log("in handeMessage 26:");
 
@@ -106,7 +106,7 @@ async function callOpenApi(senderPsid, requestText) {
   console.log('data v40');
   console.log(action);
   console.log('before then v2');
-  action.then((val) => {
+  await action.then((val) => {
     console.log("inside then");
     const response = {
       'text': 'text output'
