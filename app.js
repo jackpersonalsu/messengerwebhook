@@ -83,7 +83,7 @@ async function handleMessage(senderPsid, receivedMessage) {
 }
 
 async function callOpenApi(senderPsid, requestText) {
-  console.log('calling open api async v30');
+  console.log('calling open api async v32');
   const { Configuration, OpenAIApi } = require("openai");
 
   const configuration = new Configuration({
