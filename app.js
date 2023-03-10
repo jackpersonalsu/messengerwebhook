@@ -111,8 +111,10 @@ async function callOpenApi(senderPsid, requestText) {
     const response = {
       'text': 'text output'
     };
-    console.log(val);
+    console.log('before callSendAPI');
     const output = callSendAPI(senderPsid, response);
+    console.log('callSendAPI Done');
+    console.log(val.data);
     console.log(output);
     resolve();
   });
