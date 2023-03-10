@@ -102,20 +102,13 @@ async function callOpenApi(senderPsid, requestText) {
   };
   console.log(requestObj);
   const action =  openai.createCompletion(requestObj);
-
-  console.log('data v40');
-  console.log(action);
-  console.log('before then v5');
-  await action.then((val) => {
+  action.then((val) => {
     console.log("iiiinside then");
     const response = {
       'text': 'text output'
     };
     console.log('before callSendAPIaaa');
     const output = callSendAPI(senderPsid, response);
-    console.log('callSendAPI Done');
-    console.log(val.data);
-    console.log(output);
     resolve();
   });
   console.log('after then');
