@@ -105,13 +105,13 @@ async function callOpenApi(senderPsid, requestText) {
 
   console.log('data v40');
   console.log(action);
-  console.log('before then v2');
+  console.log('before then v3');
   await action.then((val) => {
-    console.log("inside then");
+    console.log("iiiinside then");
     const response = {
       'text': 'text output'
     };
-    console.log('before callSendAPI');
+    console.log('before callSendAPIaaa');
     const output = callSendAPI(senderPsid, response);
     console.log('callSendAPI Done');
     console.log(val.data);
