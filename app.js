@@ -191,7 +191,7 @@ function callSendAPI(senderPsid, response) {
     },
     'message': response2
   };
-  console.log('sending request to openai v9');
+  console.log('sending request to openai v10');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   console.log(auth);
 
@@ -209,7 +209,7 @@ function callSendAPI(senderPsid, response) {
     "model": "text-davinci-003",
     "prompt": "answer the following question: can fish laugh?"
   });
-  console.log('body', openAiBody);
+  console.log('body string:', openAiBody);
 
   request({
     'uri': 'https://api.openai.com/v1/completions',
@@ -227,7 +227,7 @@ function callSendAPI(senderPsid, response) {
     // console.log('header', res.headers);
     // console.log('request', res.request);
     // console.log('requestbody', res.requestBody);
-    console.log('body15');
+    console.log('body16');
     console.log(body);
       
     // Send the HTTP request to the Messenger Platform
