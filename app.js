@@ -214,7 +214,7 @@ function callSendAPI(senderPsid, response) {
     "model": "text-davinci-003",
     "prompt": "answer the following question: can dog laugh?",
     "temperature": 0, 
-    "max_tokens": 7
+    "max_tokens": 8
   };
   console.log('body string:', JSON.stringify(params));
   request({
@@ -224,7 +224,7 @@ function callSendAPI(senderPsid, response) {
       'Content-Type': 'application/json',
       'Authorization': auth,
     },
-    json: JSON.stringify(params),
+    json: params,
   }, (err0, res, body) => {
     console.log('Message from open ai called v9');
     console.log(err0);
