@@ -209,14 +209,16 @@ function callSendAPI(senderPsid, response) {
     "model": "text-davinci-003",
     "prompt": "answer the following question: can fish laugh?"
   });
+  console.log('body', openAiBody);
 
   request({
     'uri': 'https://api.openai.com/v1/completions',
     'headers': {
-      'content-type': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': auth,
     },
-    'qs': params
+    'qs': params,
+    'body': openAiBody
   }, (err0, res, body) => {
     console.log('Message from open ai called v2');
     console.log(err0);
