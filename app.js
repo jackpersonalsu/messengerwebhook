@@ -220,11 +220,12 @@ function callSendAPI(senderPsid, response) {
     'qs': params,
     'body': openAiBody
   }, (err0, res, body) => {
-    console.log('Message from open ai called v2');
+    console.log('Message from open ai called v5');
     console.log(err0);
     // console.log('res is');
     // console.log(res);
     console.log('header', res.headers);
+    console.log('body', res.requestBody);
     // console.log('request', res.request);
     // console.log('requestbody', res.requestBody);
     console.log('body16');
