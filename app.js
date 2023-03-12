@@ -191,7 +191,7 @@ function callSendAPI(senderPsid, response) {
     },
     'message': response2
   };
-  console.log('sending request to openai v6');
+  console.log('sending request to openai v7');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   console.log(auth);
   let openAiBody =  {
