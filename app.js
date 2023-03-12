@@ -21,6 +21,7 @@
 
 // Use dotenv to read .env vars into Node
 require('dotenv').config();
+const openai = require('openai');
 
 // Imports dependencies and set up http server
 const
@@ -191,28 +192,48 @@ function callSendAPI(senderPsid, response) {
     'message': response2
   };
 
-  // Send the HTTP request to the Messenger Platform
   request({
-    'uri': 'https://graph.facebook.com/v2.6/me/messages',
-    'qs': { 'access_token': PAGE_ACCESS_TOKEN },
-    'method': 'POST',
-    'json': requestBody
-  }, (err, _res, _body) => {
-    if (!err) {
-      console.log('Message sent!');
-      request({
-        'uri': 'https://graph.facebook.com/v2.6/me/messages',
-        'qs': { 'access_token': PAGE_ACCESS_TOKEN },
-        'method': 'POST',
-        'json': requestBody2
-      }, (e1, _r1, _b1) => {
-          console.log('second message sent');
-          console.log(e1);
-        });
-    } else {
-      console.error('Unable to send message:' + err);
-    }
+    'uri': 'https://api.openai.com/v1/completions',
+    'content-type': 'application/json',
+    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    'model': "text-davinci-003",
+    'prompt': "answer the following question: can dog launch?",
+    'max_tokens': 8,
+    "temperature": 0
+  }, (err0, res, body) => {
+    console.log('Message from open ai called v2');
+    console.log(err0);
+    console.log('res is');
+    console.log(res);
+    console.log('body');
+    console.log(body);
+      
+    // Send the HTTP request to the Messenger Platform
+    request({
+      'uri': 'https://graph.facebook.com/v2.6/me/messages',
+      'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+      'method': 'POST',
+      'json': requestBody
+    }, (err, _res, _body) => {
+      if (!err) {
+        console.log('Message sent!');
+        
+        // request({
+        //   'uri': 'https://graph.facebook.com/v2.6/me/messages',
+        //   'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+        //   'method': 'POST',
+        //   'json': requestBody2
+        // }, (e1, _r1, _b1) => {
+        //     console.log('second message sent');
+        //     console.log(e1);
+        //   });
+      } else {
+        console.error('Unable to send message:' + err);
+      }
+    });
   });
+
+  
 }
 
 // listen for requests :)
