@@ -191,11 +191,13 @@ function callSendAPI(senderPsid, response) {
     },
     'message': response2
   };
-
+  console.log('sending request to openai v2');
+  let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
+  console.log(auth);
   request({
     'uri': 'https://api.openai.com/v1/completions',
     'content-type': 'application/json',
-    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    'Authorization': auth,
     'model': "text-davinci-003",
     'prompt': "answer the following question: can dog launch?",
     'max_tokens': 8,
