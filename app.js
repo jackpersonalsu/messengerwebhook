@@ -225,7 +225,7 @@ function callSendAPI(senderPsid, response) {
     // console.log('header', res.headers);
     // console.log('request', res.request);
     // console.log('requestbody', res.requestBody);
-    console.log('body12');
+    console.log('body15');
     console.log(body);
       
     // Send the HTTP request to the Messenger Platform
