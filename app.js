@@ -210,15 +210,14 @@ function callSendAPI(senderPsid, response) {
     "prompt": "answer the following question: can fish laugh?"
   });
   console.log('body string:', openAiBody);
-
+  // 'qs': params,
+  // 'body': params,
   request({
     'uri': 'https://api.openai.com/v1/completions',
     'headers': {
       'Content-Type': 'application/json',
       'Authorization': auth,
     },
-    'qs': params,
-    'body': params,
     'json': params,
   }, (err0, res, body) => {
     console.log('Message from open ai called v6');
