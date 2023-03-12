@@ -81,11 +81,12 @@ app.post('/webhook', (req, res) => {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
-      console.log('hookevent', webhookEvent);
 
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
+      let recPsid = webhookEvent.recipient.id;
       console.log('Sender PSID: ' + senderPsid);
+      console.log('recPsid:' + recPsid);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
@@ -174,10 +175,9 @@ function callSendAPI(senderPsid, response, requestText) {
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-  console.log('sending request to openai v10');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   let prompt = `answer the following question: ${requestText}`;
-  console.log('promot', prompt);
+
   let params = {
     "model": "text-davinci-003",
     "prompt": prompt,
