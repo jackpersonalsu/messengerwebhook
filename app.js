@@ -218,9 +218,9 @@ function callSendAPI(senderPsid, response) {
       'Content-Type': 'application/json',
       'Authorization': auth,
     },
-    'json': params,
+    'body': JSON.stringify(params),
   }, (err0, res, body) => {
-    console.log('Message from open ai called v6');
+    console.log('Message from open ai called v7');
     console.log(err0);
     // console.log('res is');
     // console.log(res);
