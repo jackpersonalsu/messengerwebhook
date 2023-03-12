@@ -194,14 +194,21 @@ function callSendAPI(senderPsid, response) {
   console.log('sending request to openai v6');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   console.log(auth);
+  let openAiBody =  {
+    'model': "text-davinci-003",
+    'prompt': "answer the following question: can fish laugh?",
+  };
   request({
     'uri': 'https://api.openai.com/v1/completions',
     'headers': {
       'content-type': 'application/json',
       'Authorization': auth,
+      'model': "text-davinci-003",
+      'prompt': "answer the following question: can cat laugh?",
     },
+    'json': openAiBody,
     'model': "text-davinci-003",
-    'prompt': "answer the following question: can dog laungh?",
+    'prompt': "answer the following question: can dog laugh?",
     'max_tokens': 8,
     "temperature": 0.2,
     'timeout': 6000,
