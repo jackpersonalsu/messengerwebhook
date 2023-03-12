@@ -148,7 +148,7 @@ function handleMessage(senderPsid, receivedMessage) {
   }
 
   // Send the response message
-  callSendAPI(senderPsid, response);
+  callSendAPI(senderPsid, response, receivedMessage.text);
 }
 
 // Handles messaging_postbacks events
@@ -165,25 +165,26 @@ function handlePostback(senderPsid, receivedPostback) {
     response = { 'text': 'Oops, try sending another image.' };
   }
   // Send the message to acknowledge the postback
-  callSendAPI(senderPsid, response);
+  callSendAPI(senderPsid, response, 'just say hi');
 }
 
 // Sends response messages via the Send API
-function callSendAPI(senderPsid, response) {
+function callSendAPI(senderPsid, response, requestText) {
 
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
   console.log('sending request to openai v10');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
-
+  let prompt = `answer the following question: ${requestText}`;
+  console.log('promot', prompt);
   let params = {
     "model": "text-davinci-003",
-    "prompt": "answer the following question: can dog laugh?",
+    "prompt": prompt,
     "temperature": 0, 
     "max_tokens": 8
   };
-  console.log('body string:', JSON.stringify(params));
+
   request({
     uri: 'https://api.openai.com/v1/completions',
     method: "POST",
