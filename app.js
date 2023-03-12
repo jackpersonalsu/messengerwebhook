@@ -205,7 +205,7 @@ function callSendAPI(senderPsid, response) {
         'qs': { 'access_token': PAGE_ACCESS_TOKEN },
         'method': 'POST',
         'json': requestBody2
-      }, (e1, _, _) => {
+      }, (e1, _r1, _b1) => {
           console.log('second message sent');
           console.log(e1);
         });
