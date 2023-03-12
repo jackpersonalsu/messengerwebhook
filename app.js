@@ -81,7 +81,7 @@ app.post('/webhook', (req, res) => {
 
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
-      console.log(webhookEvent);
+      console.log('hookevent', webhookEvent);
 
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
@@ -191,7 +191,7 @@ function callSendAPI(senderPsid, response) {
     },
     'message': response2
   };
-  console.log('sending request to openai v3');
+  console.log('sending request to openai v5');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   console.log(auth);
   request({
@@ -203,7 +203,8 @@ function callSendAPI(senderPsid, response) {
     'model': "text-davinci-003",
     'prompt': "answer the following question: can dog laungh?",
     'max_tokens': 8,
-    "temperature": 0
+    "temperature": 0,
+    'timeout': 6000,
   }, (err0, res, body) => {
     console.log('Message from open ai called v2');
     console.log(err0);
