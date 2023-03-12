@@ -203,8 +203,9 @@ function callSendAPI(senderPsid, response) {
     'model': "text-davinci-003",
     'prompt': "answer the following question: can dog laungh?",
     'max_tokens': 8,
-    "temperature": 0,
+    "temperature": 0.2,
     'timeout': 6000,
+    'user': senderPsid
   }, (err0, res, body) => {
     console.log('Message from open ai called v2');
     console.log(err0);
