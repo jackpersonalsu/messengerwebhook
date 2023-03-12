@@ -200,14 +200,14 @@ function callSendAPI(senderPsid, response) {
   }, (err, _res, _body) => {
     if (!err) {
       console.log('Message sent!');
-      request({
-        'uri': 'https://graph.facebook.com/v2.6/me/messages',
-        'qs': { 'access_token': PAGE_ACCESS_TOKEN },
-        'method': 'POST',
-        'json': requestBody2}, (e1, _, _) => {
-          console.log('second message sent');
-          console.log(err);
-        });
+      // request({
+      //   'uri': 'https://graph.facebook.com/v2.6/me/messages',
+      //   'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+      //   'method': 'POST',
+      //   'json': requestBody2}, (e1, _, _) => {
+      //     console.log('second message sent');
+      //     console.log(err);
+      //   });
     } else {
       console.error('Unable to send message:' + err);
     }
