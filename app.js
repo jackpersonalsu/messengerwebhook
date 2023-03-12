@@ -191,7 +191,7 @@ function callSendAPI(senderPsid, response) {
     },
     'message': response2
   };
-  console.log('sending request to openai v8');
+  console.log('sending request to openai v9');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   console.log(auth);
 
@@ -201,7 +201,10 @@ function callSendAPI(senderPsid, response) {
   //   "temperature": 0.2,
   //   "user": senderPsid
   // };
-
+  let params = {
+    "model": "text-davinci-003",
+    "prompt": "answer the following question: can dog laugh?"
+  };
   let openAiBody =  JSON.stringify({
     "model": "text-davinci-003",
     "prompt": "answer the following question: can fish laugh?"
@@ -213,7 +216,7 @@ function callSendAPI(senderPsid, response) {
       'content-type': 'application/json',
       'Authorization': auth,
     },
-    'json': openAiBody,
+    'qs': params
   }, (err0, res, body) => {
     console.log('Message from open ai called v2');
     console.log(err0);
