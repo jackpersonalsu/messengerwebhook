@@ -113,7 +113,7 @@ function handleMessage(senderPsid, receivedMessage) {
     // Create the payload for a basic text message, which
     // will be added to the body of your request to the Send API
     response = {
-      'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachment!`
+      'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachmentv2!`
     };
   } else if (receivedMessage.attachments) {
 
@@ -200,14 +200,15 @@ function callSendAPI(senderPsid, response) {
   }, (err, _res, _body) => {
     if (!err) {
       console.log('Message sent!');
-      // request({
-      //   'uri': 'https://graph.facebook.com/v2.6/me/messages',
-      //   'qs': { 'access_token': PAGE_ACCESS_TOKEN },
-      //   'method': 'POST',
-      //   'json': requestBody2}, (e1, _, _) => {
-      //     console.log('second message sent');
-      //     console.log(err);
-      //   });
+      request({
+        'uri': 'https://graph.facebook.com/v2.6/me/messages',
+        'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+        'method': 'POST',
+        'json': requestBody2
+      }, (e1, _, _) => {
+          console.log('second message sent');
+          console.log(e1);
+        });
     } else {
       console.error('Unable to send message:' + err);
     }
