@@ -211,7 +211,7 @@ function callSendAPI(senderPsid, response) {
   // });
 
   let params = {
-    "model": "text-davinci-003",
+    "model": "text-davinci-002",
     "prompt": "answer the following question: can dog laugh?"
   };
   console.log('body string:', JSON.stringify(params));
