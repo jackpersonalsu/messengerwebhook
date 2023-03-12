@@ -202,7 +202,7 @@ function callSendAPI(senderPsid, response) {
   //   "user": senderPsid
   // };
 
-  let openAiBody =  JSON.parse({
+  let openAiBody =  JSON.stringify({
     "model": "text-davinci-003",
     "prompt": "answer the following question: can fish laugh?"
   });
