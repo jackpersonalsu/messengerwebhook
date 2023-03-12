@@ -199,7 +199,7 @@ function callSendAPI(senderPsid, response) {
     'content-type': 'application/json',
     'Authorization': auth,
     'model': "text-davinci-003",
-    'prompt': "answer the following question: can dog launch?",
+    'prompt': "answer the following question: can dog laungh?",
     'max_tokens': 8,
     "temperature": 0
   }, (err0, res, body) => {
