@@ -174,41 +174,8 @@ function callSendAPI(senderPsid, response) {
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-  // Construct the message body
-  let requestBody = {
-    'recipient': {
-      'id': senderPsid
-    },
-    'message': response
-  };
-
-  let response2 = {
-    'text': `send message t test`
-  };
-  let requestBody2 = {
-    'recipient': {
-      'id': senderPsid
-    },
-    'message': response2
-  };
   console.log('sending request to openai v10');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
-  console.log(auth);
-
-  // let openAiBody =  {
-  //   "model": "text-davinci-003",
-  //   "prompt": "answer the following question: can fish laugh?",
-  //   "temperature": 0.2,
-  //   "user": senderPsid
-  // };
-
-  // 'qs': params,
-  // 'body': params,
-
-  // let openAiBody =  JSON.stringify({
-  //   "model": "text-davinci-003",
-  //   "prompt": "answer the following question: can fish laugh?"
-  // });
 
   let params = {
     "model": "text-davinci-003",
@@ -226,18 +193,24 @@ function callSendAPI(senderPsid, response) {
     },
     json: params,
   }, (err0, res, body) => {
-    console.log('Message from open ai called v9');
+    console.log('Message from open ai called v10');
     console.log(err0);
-    // console.log('res is');
-    // console.log(res);
-
-    console.log('request headers', res.request.headers);
-    console.log('request body', res.request.body);
-    // console.log('request', res.request);
-    // console.log('requestbody', res.requestBody);
-    console.log('respnose body16');
     console.log(body);
+    console.log(body.choices);
+    console.log( body.choices[0].text);
+    console.log('sending..');
+    // console.log('res is');
       
+    let openai_response = {
+      'text': body.choices[0].text
+    };
+
+    let requestBody = {
+      'recipient': {
+        'id': senderPsid
+      },
+      'message': openai_response
+    };
     // Send the HTTP request to the Messenger Platform
     request({
       'uri': 'https://graph.facebook.com/v2.6/me/messages',
@@ -247,16 +220,6 @@ function callSendAPI(senderPsid, response) {
     }, (err, _res, _body) => {
       if (!err) {
         console.log('Message sent!');
-        
-        // request({
-        //   'uri': 'https://graph.facebook.com/v2.6/me/messages',
-        //   'qs': { 'access_token': PAGE_ACCESS_TOKEN },
-        //   'method': 'POST',
-        //   'json': requestBody2
-        // }, (e1, _r1, _b1) => {
-        //     console.log('second message sent');
-        //     console.log(e1);
-        //   });
       } else {
         console.error('Unable to send message:' + err);
       }
