@@ -218,9 +218,10 @@ function callSendAPI(senderPsid, response) {
       'Authorization': auth,
     },
     'qs': params,
-    'body': openAiBody
+    'body': openAiBody,
+    'json': openAiBody,
   }, (err0, res, body) => {
-    console.log('Message from open ai called v5');
+    console.log('Message from open ai called v6');
     console.log(err0);
     // console.log('res is');
     // console.log(res);
