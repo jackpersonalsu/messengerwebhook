@@ -191,12 +191,12 @@ function callSendAPI(senderPsid, response) {
     },
     'message': response2
   };
-  console.log('sending request to openai v7');
+  console.log('sending request to openai v8');
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   console.log(auth);
   let openAiBody =  {
-    'model': "text-davinci-003",
-    'prompt': "answer the following question: can fish laugh?",
+    "model": "text-davinci-003",
+    "prompt": "answer the following question: can fish laugh?",
   };
   request({
     'uri': 'https://api.openai.com/v1/completions',
