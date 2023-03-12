@@ -201,17 +201,19 @@ function callSendAPI(senderPsid, response) {
   //   "temperature": 0.2,
   //   "user": senderPsid
   // };
-  let params = {
-    "model": "text-davinci-003",
-    "prompt": "answer the following question: can dog laugh?"
-  };
+  console.log('body string:', openAiBody);
+  // 'qs': params,
+  // 'body': params,
+
   let openAiBody =  JSON.stringify({
     "model": "text-davinci-003",
     "prompt": "answer the following question: can fish laugh?"
   });
-  console.log('body string:', openAiBody);
-  // 'qs': params,
-  // 'body': params,
+  
+  let params = {
+    "model": "text-davinci-003",
+    "prompt": "answer the following question: can dog laugh?"
+  };
   request({
     'uri': 'https://api.openai.com/v1/completions',
     'headers': {
@@ -220,7 +222,7 @@ function callSendAPI(senderPsid, response) {
     },
     'body': JSON.stringify(params),
   }, (err0, res, body) => {
-    console.log('Message from open ai called v7');
+    console.log('Message from open ai called v8');
     console.log(err0);
     // console.log('res is');
     // console.log(res);
