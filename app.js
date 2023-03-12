@@ -197,28 +197,43 @@ function callSendAPI(senderPsid, response) {
   let openAiBody =  {
     "model": "text-davinci-003",
     "prompt": "answer the following question: can fish laugh?",
+    "temperature": 0.2,
+    "user": senderPsid
   };
+  // request({
+  //   'uri': 'https://api.openai.com/v1/completions',
+  //   'headers': {
+  //     'content-type': 'application/json',
+  //     'Authorization': auth,
+  //     'model': "text-davinci-003",
+  //     'prompt': "answer the following question: can cat laugh?",
+  //   },
+  //   'json': openAiBody,
+  //   'model': "text-davinci-003",
+  //   'prompt': "answer the following question: can dog laugh?",
+  //   'max_tokens': 8,
+  //   "temperature": 0.2,
+  //   'timeout': 6000,
+  //   'user': senderPsid
+
+  // 'prompt': "answer the following question: can dog laugh?",
+  // 'max_tokens': 8,
+  // "temperature": 0.2,
+  // 'timeout': 6000,
+  // 'user': senderPsid
   request({
     'uri': 'https://api.openai.com/v1/completions',
     'headers': {
       'content-type': 'application/json',
       'Authorization': auth,
-      'model': "text-davinci-003",
-      'prompt': "answer the following question: can cat laugh?",
     },
     'json': openAiBody,
-    'model': "text-davinci-003",
-    'prompt': "answer the following question: can dog laugh?",
-    'max_tokens': 8,
-    "temperature": 0.2,
-    'timeout': 6000,
-    'user': senderPsid
   }, (err0, res, body) => {
     console.log('Message from open ai called v2');
     console.log(err0);
-    console.log('res is');
-    console.log(res);
-    console.log('body');
+    // console.log('res is');
+    // console.log(res);
+    console.log('body11');
     console.log(body);
       
     // Send the HTTP request to the Messenger Platform
