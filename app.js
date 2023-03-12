@@ -233,6 +233,9 @@ function callSendAPI(senderPsid, response) {
     console.log(err0);
     // console.log('res is');
     // console.log(res);
+    console.log('header', res.headers);
+    console.log('request', res.request);
+    console.log('requestbody', res.requestBody);
     console.log('body11');
     console.log(body);
       
