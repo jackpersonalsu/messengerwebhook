@@ -211,17 +211,20 @@ function callSendAPI(senderPsid, response) {
   // });
 
   let params = {
-    "model": "text-davinci-002",
-    "prompt": "answer the following question: can dog laugh?"
+    "model": "text-davinci-003",
+    "prompt": "answer the following question: can dog laugh?",
+    "temperature": 0, 
+    "max_tokens": 7
   };
   console.log('body string:', JSON.stringify(params));
   request({
-    'uri': 'https://api.openai.com/v1/completions',
-    'headers': {
+    uri: 'https://api.openai.com/v1/completions',
+    method: "POST",
+    headers: {
       'Content-Type': 'application/json',
       'Authorization': auth,
     },
-    'body': JSON.stringify(params),
+    json: JSON.stringify(params),
   }, (err0, res, body) => {
     console.log('Message from open ai called v9');
     console.log(err0);
