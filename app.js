@@ -87,14 +87,12 @@ app.post('/webhook', (req, res) => {
       let recPsid = webhookEvent.recipient.id;
       console.log('Sender PSID: ' + senderPsid);
       console.log('recPsid:' + recPsid);
-      console.log(recPsid === 105907225783056);
-      console.log(recPsid === '105907225783056');
       
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      if (webhookEvent.message && recPsid === 105907225783056) {
+      if (webhookEvent.message && recPsid === '105907225783056') {
         handleMessage(senderPsid, webhookEvent.message);
-      } else if (webhookEvent.postback && recPsid === 105907225783056) {
+      } else if (webhookEvent.postback && recPsid === '105907225783056') {
         handlePostback(senderPsid, webhookEvent.postback);
       }
     });
@@ -174,7 +172,7 @@ function handlePostback(senderPsid, receivedPostback) {
 
 // Sends response messages via the Send API
 function callSendAPI(senderPsid, response, requestText) {
-
+  console.log('sen call api');
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
