@@ -194,14 +194,7 @@ function callSendAPI(senderPsid, response, requestText) {
     },
     json: params,
   }, (err0, res, body) => {
-    console.log('Message from open ai called v10');
-    console.log(err0);
-    console.log(body);
-    console.log(body.choices);
-    console.log( body.choices[0].text);
-    console.log('sending..');
-    // console.log('res is');
-      
+    console.log('openai response ', body.choices[0].text);
     let openai_response = {
       'text': body.choices[0].text
     };
