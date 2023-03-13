@@ -88,6 +88,8 @@ app.post('/webhook', (req, res) => {
       console.log('Sender PSID: ' + senderPsid);
       console.log('recPsid:' + recPsid);
       console.log(recPsid === 105907225783056);
+      console.log(recPsid === '105907225783056');
+      
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhookEvent.message && recPsid === 105907225783056) {
