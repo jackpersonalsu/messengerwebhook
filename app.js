@@ -92,17 +92,17 @@ app.post('/webhook', (req, res) => {
       // pass the event to the appropriate handler function
       if (webhookEvent.message && recPsid === '105907225783056') {
         handleMessage(senderPsid, webhookEvent.message);
-      } else if (webhookEvent.postback) {
+      } else if (webhookEvent.postback && recPsid === '105907225783056') {
         handlePostback(senderPsid, webhookEvent.postback);
       }
     });
 
     // Returns a '200 OK' response to all requests
-    res.status(200).send('EVENT_RECEIVED');
+    return res.status(200).send('EVENT_RECEIVED');
   } else {
 
     // Returns a '404 Not Found' if event is not from a page subscription
-    res.sendStatus(404);
+    return res.sendStatus(404);
   }
 });
 
@@ -184,7 +184,7 @@ function callSendAPI(senderPsid, response, requestText) {
     "temperature": 0, 
     "max_tokens": 128
   };
-
+  console.log('sending request');
   request({
     uri: 'https://api.openai.com/v1/completions',
     method: "POST",
