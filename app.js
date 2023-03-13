@@ -90,9 +90,9 @@ app.post('/webhook', (req, res) => {
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      if (webhookEvent.message && recPsid === '105907225783056') {
+      if (webhookEvent.message && recPsid === 105907225783056) {
         handleMessage(senderPsid, webhookEvent.message);
-      } else if (webhookEvent.postback && recPsid === '105907225783056') {
+      } else if (webhookEvent.postback && recPsid === 105907225783056) {
         handlePostback(senderPsid, webhookEvent.postback);
       }
     });
