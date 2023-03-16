@@ -37,6 +37,7 @@ app.get('/hello', (req, res) => {
 
 app.get('/webhook', (req, res) => {
   // const VERIFY_TOKEN = 'YOUR_VERIFY_TOKEN'; // Replace with your verify token
+  console.log("step1");
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
   const mode = req.query['hub.mode'];
   const token = req.query['hub.verify_token'];
