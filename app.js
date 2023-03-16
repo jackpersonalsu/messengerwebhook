@@ -44,17 +44,17 @@ app.get('/webhook', (req, res) => {
   const challenge = req.query['hub.challenge'];
   console.log("step2");
   if (mode && token) {
-    console.log("step3");
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-      console.log("step4");
-      res.status(200).send("<html><body>hello</body></html>");
+      console.log("verified");
+      res.status(200).send(challenge);
     } else {
-      console.log("step5");
+      console.log("403 error");
       res.sendStatus(403);
     }
-    console.log("step6");
+  } else {
+    console.log("403 error 2");
+    res.sendStatus(403);
   }
-  console.log("step7");
 });
 
 function handleMessage(senderId, message) {
