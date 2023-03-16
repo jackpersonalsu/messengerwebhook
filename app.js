@@ -28,6 +28,13 @@ app.post('/webhook', (req, res) => {
   }
 });
 
+app.get('/hello', (req, res) => {
+  // const VERIFY_TOKEN = 'YOUR_VERIFY_TOKEN'; // Replace with your verify token
+
+    res.status(200).send("helo from jacksu");
+
+});
+
 app.get('/webhook', (req, res) => {
   // const VERIFY_TOKEN = 'YOUR_VERIFY_TOKEN'; // Replace with your verify token
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
