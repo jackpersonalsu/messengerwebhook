@@ -46,7 +46,7 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(senderId, message) {
   const text = message.text;
-
+  console.log('in handle message', text);
   if (text) {
     axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
       prompt: text,
@@ -63,7 +63,9 @@ function handleMessage(senderId, message) {
         'Content-Type': 'application/json'
       }
     }).then(response => {
+      console.log('response got');
       const reply = response.data.choices[0].text.trim();
+      console.log('reply is ', reply);
       sendTextMessage(senderId, reply);
     }).catch(error => {
       console.error('Error calling GPT API:', error);
