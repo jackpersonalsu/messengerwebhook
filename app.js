@@ -11,12 +11,12 @@ const app = express().use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
   const body = req.body;
-
+  console.log('in post webhook');
   if (body.object === 'page') {
     body.entry.forEach(entry => {
       const webhookEvent = entry.messaging[0];
       const senderId = webhookEvent.sender.id;
-
+      console.log('sender id is ', senderId);
       if (webhookEvent.message) {
         handleMessage(senderId, webhookEvent.message);
       }
