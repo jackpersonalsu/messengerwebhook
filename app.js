@@ -178,7 +178,7 @@ function callSendAPI(senderPsid, response, requestText) {
 
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
   let prompt = `answer the following question: ${requestText}`;
-
+  console.log("sender psid", senderPsid);
   let params = {
     "model": "text-davinci-003",
     "prompt": prompt,
