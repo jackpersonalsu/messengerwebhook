@@ -80,8 +80,9 @@ app.post('/webhook', (req, res) => {
     body.entry.forEach(function(entry) {
 
       // Gets the body of the webhook event
+      console.log('webevent', entry);
       let webhookEvent = entry.messaging[0];
-      console.log('webevent', webhookEvent);
+
       // Get the sender PSID
       let senderPsid = webhookEvent.sender.id;
       let recPsid = webhookEvent.recipient.id;
