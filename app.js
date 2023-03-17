@@ -109,7 +109,8 @@ app.post('/webhook', (req, res) => {
 
 // Handles messages events
 function handleMessage(senderPsid, receivedMessage) {
-  console.log('handle message');
+  console.log('handle message', receivedMessage);
+  console.log(receivedMessage.text);
   let response;
 
   // Checks if the message contains text
