@@ -196,6 +196,7 @@ function callSendAPI(senderPsid, response, requestText) {
     },
     json: params,
   }, (err0, res, body) => {
+    console.log('openai response ', body);
     console.log('openai response ', body.choices[0].text);
     let openai_response = {
       'text': body.choices[0].text
