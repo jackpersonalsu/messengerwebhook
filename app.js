@@ -184,7 +184,7 @@ function callSendAPI(senderPsid, response, requestText) {
     "prompt": prompt,
     "temperature": 0, 
     "max_tokens": 128,
-    "session_id": senderPsid
+    "id": senderPsid
   };
   console.log('sending request');
   request({
