@@ -183,7 +183,8 @@ function callSendAPI(senderPsid, response, requestText) {
     "model": "text-davinci-003",
     "prompt": prompt,
     "temperature": 0, 
-    "max_tokens": 128
+    "max_tokens": 128,
+    "session_id": senderPsid
   };
   console.log('sending request');
   request({
