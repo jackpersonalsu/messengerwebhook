@@ -297,8 +297,11 @@ function responseFromChatgpt(message) {
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
-  let prompt = `answer the following question: ${requestText}`;
-  const idx = message.content.indexOf(':');
+  let prompt = `answer the following question: ${message.content}`;
+  let idx = message.content.indexOf(':');
+  if (idx < 0) {
+    let idx = message.content.indexOf(',');
+  }
   const quest = message.content.substring(idx + 1);
   message.reply('Hello from booto chat!');
 
