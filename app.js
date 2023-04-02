@@ -54,6 +54,18 @@ app.get('/verifyrole', (req, res) => {
     res.status(200).send('<html><body>verify role test page</body></html>');
 });
 
+app.get('/tos', (req, res) => {
+  // https://bobomessengerbot.herokuapp.com/verifyrole
+    console.log('tos is called');
+    res.status(200).send('<html><body>This is placeholder for Terms And Services for BoboChatBot, a testing bot site</body></html>');
+});
+
+app.get('/privacy', (req, res) => {
+  // https://bobomessengerbot.herokuapp.com/verifyrole
+    console.log('privacy is called');
+    res.status(200).send('<html><body>This is placeholder for Privacy Policy for BoboChatBot, a testing bot site</body></html>');
+});
+
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
