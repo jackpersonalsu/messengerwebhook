@@ -286,8 +286,9 @@ discordClient.on('messageCreate', (message) => {
     message.reply('Hello from booto chat!');
   }
 });
-// const TOKEN = process.env.DISCORD_TOKEN;
-const TOKEN = 'MTA5MTkxOTc2MzczMjY5NzE0OA.G3ln1I.m3wS_qQHnTilLscgva0nVvN_OeOqhm8dNqbkl0';
+
+const TOKEN = process.env.DISCORD_TOKEN;
+
 discordClient.login(TOKEN);
 
 // listen for requests :)
