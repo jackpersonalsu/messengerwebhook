@@ -265,7 +265,8 @@ function callSendAPI(senderPsid, response, requestText) {
 
 // const discordClient = new Client({ intents: [GatewayIntentBits.Guilds]  });
 
-const { Client, GatewayIntentBits } = require('discord.js')
+const { Client, GatewayIntentBits } = require('discord.js');
+const { response } = require('express');
 
 // Specify the intents you need
 const intents = [
@@ -282,10 +283,48 @@ discordClient.on('ready', () => {
 
 discordClient.on('messageCreate', (message) => {
   console.log(`discordClient message ${message.content}`);  
-  if (message.content === '!hello') {
-    message.reply('Hello from booto chat!');
+  const refer = message.content.toLowerCase();
+  if (refer.startsWith("@bobo") || refer.startsWith("bobo")) {
+    console.log('bobo responding');
+    responseFromChatgpt(message);
   }
 });
+
+
+function responseFromChatgpt(message) {
+  console.log('responseFromChatgpt');
+  // The page access token we have generated in your app settings
+  const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
+  let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
+  let prompt = `answer the following question: ${requestText}`;
+  const idx = message.content.indexOf(':');
+  const quest = message.content.substring(idx + 1);
+  message.reply('Hello from booto chat!');
+
+  let params = {
+    "model": "text-davinci-003",
+    "prompt": prompt,
+    "temperature": 0, 
+    "max_tokens": 128,
+  };
+  console.log('sending request');
+  request({
+    uri: 'https://api.openai.com/v1/completions',
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': auth,
+    },
+    json: params,
+  }, (err0, res, body) => {
+    console.log('openai response ', body);
+    console.log('openai response ', body.choices[0].text);
+    console.log('err', err0);
+    message.reply(body.choices[0].text);
+  });
+}
+
 
 const TOKEN = process.env.DISCORD_TOKEN;
 
