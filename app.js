@@ -17,6 +17,9 @@
  * 3. Add your VERIFY_TOKEN and PAGE_ACCESS_TOKEN to your environment vars
  */
 
+// README, in shirley machine: cd /Users/shirleysu/Projects/messengerwebhook && git add . && git commit -m "update" && git push
+// github url: https://github.com/jackpersonalsu/messengerwebhook
+
 'use strict';
 
 // Use dotenv to read .env vars into Node
@@ -39,6 +42,12 @@ app.use(json());
 // Respond with 'Hello World' when a GET request is made to the homepage
 app.get('/', function (_req, res) {
   res.send('Hello World');
+});
+
+// Adds support for GET requests to our webhook
+app.get('/verifyrole', (req, res) => {
+    console.log('verifyrole is called');
+    res.status(200).send('<html><body>verify role test page</body></html>');
 });
 
 // Adds support for GET requests to our webhook
@@ -110,6 +119,14 @@ app.post('/webhook', (req, res) => {
 // Handles messages events
 function handleMessage(senderPsid, receivedMessage) {
   console.log('handle message', receivedMessage);
+
+//   message {
+
+//   mid: 'm__ZXg2RTfz_qByCrRMp__LtdMZVU2x8pI2h68-Nj-qgWKJpTD21lqLi0t5uMAsaINHD2f47_3iM6Emx3moICjkQ',
+    
+//  attachments: [ { type: 'audio', payload: [Object] } ]
+
+
   console.log(receivedMessage.text);
   let response;
 
