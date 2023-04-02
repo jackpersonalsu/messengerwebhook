@@ -56,13 +56,13 @@ app.get('/verifyrole', (req, res) => {
 });
 
 app.get('/tos', (req, res) => {
-  // https://bobomessengerbot.herokuapp.com/verifyrole
+  // https://bobomessengerbot.herokuapp.com/tos
     console.log('tos is called');
     res.status(200).send('<html><body>This is placeholder for Terms And Services for BoboChatBot, a testing bot site</body></html>');
 });
 
 app.get('/privacy', (req, res) => {
-  // https://bobomessengerbot.herokuapp.com/verifyrole
+  // https://bobomessengerbot.herokuapp.com/privacy
     console.log('privacy is called');
     res.status(200).send('<html><body>This is placeholder for Privacy Policy for BoboChatBot, a testing bot site</body></html>');
 });
@@ -269,6 +269,7 @@ discordClient.on('ready', () => {
 });
 
 discordClient.on('messageCreate', (message) => {
+  console.log(`discordClient message ${message.content}`);  
   if (message.content === '!hello') {
     message.reply('Hello from booto chat!');
   }
