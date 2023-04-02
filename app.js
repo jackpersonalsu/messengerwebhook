@@ -260,10 +260,22 @@ function callSendAPI(senderPsid, response, requestText) {
 }
 
 // discord bot
-const { Client, GatewayIntentBits } = require('discord.js');
+// const { Client, GatewayIntentBits } = require('discord.js');
 
 
-const discordClient = new Client({ intents: [GatewayIntentBits.Guilds]  });
+// const discordClient = new Client({ intents: [GatewayIntentBits.Guilds]  });
+
+const { Client, GatewayIntentBits } = require('discord.js')
+
+// Specify the intents you need
+const intents = [
+  GatewayIntentBits.Guilds,
+  GatewayIntentBits.GuildMessages,
+  GatewayIntentBits.MessageContent,
+];
+
+const discordClient = new Client({ intents });
+
 discordClient.on('ready', () => {
   console.log(`Boto Logged in as ${discordClient.user.tag}!`);
 });
@@ -274,8 +286,9 @@ discordClient.on('messageCreate', (message) => {
     message.reply('Hello from booto chat!');
   }
 });
-
-discordClient.login(process.env.DISCORD_TOKEN);
+// const TOKEN = process.env.DISCORD_TOKEN;
+const TOKEN = 'MTA5MTkxOTc2MzczMjY5NzE0OA.G3ln1I.m3wS_qQHnTilLscgva0nVvN_OeOqhm8dNqbkl0';
+discordClient.login(TOKEN);
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
