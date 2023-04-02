@@ -20,6 +20,9 @@
 // README, in shirley machine: cd /Users/shirleysu/Projects/messengerwebhook && git add . && git commit -m "update" && git push
 // github url: https://github.com/jackpersonalsu/messengerwebhook
 
+// one setup https://dashboard.heroku.com/apps
+// https://dashboard.heroku.com/pipelines/d6caf541-13a7-40fb-8b75-9671e4aff0e1
+
 'use strict';
 
 // Use dotenv to read .env vars into Node
@@ -41,11 +44,12 @@ app.use(json());
 
 // Respond with 'Hello World' when a GET request is made to the homepage
 app.get('/', function (_req, res) {
-  res.send('Hello World');
+  res.send('<HTML><BODY>Welcome, this is placehold for Bobo Chat Bot</BODY></HTML>');
 });
 
 // Adds support for GET requests to our webhook
 app.get('/verifyrole', (req, res) => {
+  // https://bobomessengerbot.herokuapp.com/verifyrole
     console.log('verifyrole is called');
     res.status(200).send('<html><body>verify role test page</body></html>');
 });
