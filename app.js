@@ -255,12 +255,33 @@ function callSendAPI(senderPsid, response, requestText) {
         console.error('Unable to send message:' + err);
       }
     });
-  });
-
-  
+  });  
 }
+
+// discord bot
+const Discord = require('discord.js');
+const discordClient = new Discord.Client();
+const discordToken =   process.env.DISCORD_TOKEN;;
+
+discordClient.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+discordClient.on('message', (message) => {
+  if (message.content === '!hello') {
+    message.reply('Hello from bobo chat bot!');
+  }
+});
+
+discordClient.login(discordToken);
+
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+
+
+
