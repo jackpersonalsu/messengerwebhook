@@ -265,12 +265,12 @@ const { Client, GatewayIntentBits } = require('discord.js');
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds]  });
 discordClient.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Boto Logged in as ${discordClient.user.tag}!`);
 });
 
 discordClient.on('messageCreate', (message) => {
   if (message.content === '!hello') {
-    message.reply('Hello!');
+    message.reply('Hello from booto chat!');
   }
 });
 
