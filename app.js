@@ -25,6 +25,7 @@
 
 'use strict';
 
+
 // Use dotenv to read .env vars into Node
 require('dotenv').config();
 const openai = require('openai');
@@ -259,23 +260,21 @@ function callSendAPI(senderPsid, response, requestText) {
 }
 
 // discord bot
-const Discord = require('discord.js');
-const discordClient = new Discord.Client();
-const discordToken =   process.env.DISCORD_TOKEN;;
+const { Client, GatewayIntentBits } = require('discord.js');
 
+
+const discordClient = new Client({ intents: [GatewayIntentBits.Guilds]  });
 discordClient.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-discordClient.on('message', (message) => {
+discordClient.on('messageCreate', (message) => {
   if (message.content === '!hello') {
-    message.reply('Hello from bobo chat bot!');
+    message.reply('Hello!');
   }
 });
 
-discordClient.login(discordToken);
-
-
+discordClient.login(process.env.DISCORD_TOKEN);
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
