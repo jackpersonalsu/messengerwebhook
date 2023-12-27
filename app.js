@@ -309,10 +309,11 @@ function responseFromChatgpt(message) {
   message.reply('Hello from booto chat v2!');
 
   let params = {
-    "model": "text-davinci-003",
+    // "model": "text-davinci-003",
+    "model": "gpt-3.5-turbo-1106",
     "prompt": prompt,
     "temperature": 0, 
-    "max_tokens": 128,
+    "max_tokens": 1000,
   };
   console.log('sending request');
   request({
