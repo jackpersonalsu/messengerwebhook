@@ -333,7 +333,7 @@ discordClient.on('messageCreate', (message) => {
       }, (err0, res, body) => {
         // console.log('whisper response: ', res);
         console.log('whisper response body ', body);
-        val bodyObj = JSON.parse(body);
+        let bodyObj = JSON.parse(body);
 
         console.log('whisper response body json ', bodyObj);
         console.log('whisper response body typeof ', typeof bodyObj);
