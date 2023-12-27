@@ -338,6 +338,7 @@ discordClient.on('messageCreate', (message) => {
         if ((bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error')) {
           message.reply('Cannot understand your voice message, please enter again');
         } else {
+          console.log('whisper response body text ', body.text);
           responseFromChatgpt(message, body.text);
         }
       });
@@ -363,7 +364,7 @@ discordClient.on('messageCreate', (message) => {
 
 
 function responseFromChatgpt(message, requestMessage = null) {
-  console.log('responseFromChatgpt');
+  console.log('responseFromChatgpt', requestMessage);
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -371,11 +372,13 @@ function responseFromChatgpt(message, requestMessage = null) {
   if (requestMessage === null) {
     requestMessage = message.content;
   }
+  let content = `answer the following question: ${requestMessage}`;
+  console.log('content is ', content);
   // let messages = '[{"role": "user", "content": "answer the following question: ' + message.content + '}"}]';
   let messages = [
     {
       "role": "user",
-      "content": `answer the following question: ${requestMessage}?`
+      "content": content
     }
   ];  
   console.log('messages is ', messages);
