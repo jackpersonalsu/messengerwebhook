@@ -301,7 +301,13 @@ function responseFromChatgpt(message) {
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
-  let messages = '[{"role": "user", "content": "answer the following question: ' + message.content + '}"}]';
+  // let messages = '[{"role": "user", "content": "answer the following question: ' + message.content + '}"}]';
+  let messages = [
+    {
+      "role": "user",
+      "content": "answer the following question: Bobo, what is the meaning of life?"
+    }
+  ];  
   console.log('messages is ', messages);
   let idx = message.content.indexOf(':');
   if (idx < 0) {
