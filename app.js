@@ -335,6 +335,7 @@ discordClient.on('messageCreate', (message) => {
         console.log('whisper response body ', body);
         console.log('whisper response body error ', body.error);
         console.log('whisper response body type ', body.type);
+        console.log('supported methods ', Object.getOwnPropertyNames(body));
         if (body.type === "invalid_request_error") {
           console.log('there is error in whisper');
           message.reply('Cannot understand your voice message, please enter again');
