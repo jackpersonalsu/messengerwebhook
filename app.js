@@ -315,6 +315,7 @@ discordClient.on('messageCreate', (message) => {
           "file": audioPath
         }
       ;  
+      let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
 
       request({
         uri: 'https://api.openai.com/v1/audio/transcriptions',
@@ -326,7 +327,7 @@ discordClient.on('messageCreate', (message) => {
         json: params,
       }, (err0, res, body) => {
         console.log('whisper response ', body);
-        console.log('err', err0);
+        console.log('whisper err', err0);
       });
     };
 
