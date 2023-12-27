@@ -334,16 +334,8 @@ discordClient.on('messageCreate', (message) => {
         // console.log('whisper response: ', res);
         console.log('whisper response body ', body);
         let bodyObj = JSON.parse(body);
-
-        console.log('whisper response body json ', bodyObj);
-        console.log('whisper response body typeof ', typeof bodyObj);
-        console.log('supported methods ', Object.getOwnPropertyNames(bodyObj).filter(function (p) {
-          return typeof Math[p] === 'function';
-        }));
      
-        if (bodyObj.error !== undefined) {
-          console.log('there is error in whisper error ', bodyObj.error);
-          console.log('there is error in whisper error type ', bodyObj.error.type);
+        if ((bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error')) {
           message.reply('Cannot understand your voice message, please enter again');
         } else {
           responseFromChatgpt(message, body.text);
