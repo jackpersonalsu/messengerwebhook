@@ -285,7 +285,7 @@ discordClient.on('messageCreate', (message) => {
     const attach =  m.entries().next().value;
     const audioUrl = attach[1].url;
     const audioPath = '/tmp/audio.mp3';
-    console.log('attach url is ', attach[1].audioUrl, audioPath);
+    console.log('attach url is ', audioUrl, audioPath);
 
     const downloadAudio = async (url, path) => {
       const response = await axios({
@@ -309,22 +309,27 @@ discordClient.on('messageCreate', (message) => {
 
 
     const transcribeAudio = (path) => {
-      // Replace with the command to invoke Whisper API
-      const command = `whisper ${path}`;
-  
-      exec(command, (error, stdout, stderr) => {
-          if (error) {
-              console.error(`Error: ${error}`);
-              return;
-          }
-          if (stderr) {
-              console.error(`Stderr: ${stderr}`);
-              return;
-          }
-          console.log(`Transcription: ${stdout}`);
+      let params = 
+        {
+          "model": "whisper-1",
+          "file": audioPath
+        }
+      ;  
+
+      request({
+        uri: 'https://api.openai.com/v1/audio/transcriptions',
+        method: "POST",
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': auth,
+        },
+        json: params,
+      }, (err0, res, body) => {
+        console.log('whisper response ', body);
+        console.log('err', err0);
       });
     };
-    
+
     downloadAudio(audioUrl, audioPath)
     .then(() => {
         console.log('Audio downloaded successfully.');
@@ -363,7 +368,7 @@ function responseFromChatgpt(message) {
     let idx = message.content.indexOf(',');
   }
   const quest = message.content.substring(idx + 1);
-  message.reply('Hello from booto chat v5!');
+  message.reply('Hello from booto chat v6!');
 
   let params = {
     // "model": "text-davinci-003",
