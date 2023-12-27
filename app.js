@@ -331,7 +331,7 @@ discordClient.on('messageCreate', (message) => {
           "file": fs.createReadStream(audioPath)
         },
       }, (err0, res, body) => {
-        console.log('whisper response ', body, body.error);
+        console.log('whisper response ', body);
         console.log('whisper response e1 ', body.error);
         console.log('whisper response e2 ', body, body['error']);
         if (body.error) {
