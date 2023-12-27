@@ -318,7 +318,7 @@ function responseFromChatgpt(message) {
   };
   console.log('sending request');
   request({
-    uri: 'https://api.openai.com/v1/completions',
+    uri: 'https://api.openai.com/v1/chat/completions',
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
