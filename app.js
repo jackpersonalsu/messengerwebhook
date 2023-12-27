@@ -283,8 +283,57 @@ discordClient.on('messageCreate', (message) => {
   if (message.attachments.size > 0) {
     const m = message.attachments;
     const attach =  m.entries().next().value;
-    console.log('attach is ', attach);
-    console.log('attach url is ', attach[1].url);
+    const audioUrl = attach[1].url;
+    const audioPath = '/tmp/audio.mp3';
+    console.log('attach url is ', attach[1].audioUrl, audioPath);
+
+    const downloadAudio = async (url, path) => {
+      const response = await axios({
+          method: 'GET',
+          url: url,
+          responseType: 'stream',
+      });
+  
+      response.data.pipe(fs.createWriteStream(path));
+  
+      return new Promise((resolve, reject) => {
+          response.data.on('end', () => {
+              resolve();
+          });
+  
+          response.data.on('error', err => {
+              reject(err);
+          });
+      });
+    };
+
+
+    const transcribeAudio = (path) => {
+      // Replace with the command to invoke Whisper API
+      const command = `whisper ${path}`;
+  
+      exec(command, (error, stdout, stderr) => {
+          if (error) {
+              console.error(`Error: ${error}`);
+              return;
+          }
+          if (stderr) {
+              console.error(`Stderr: ${stderr}`);
+              return;
+          }
+          console.log(`Transcription: ${stdout}`);
+      });
+    };
+    
+    downloadAudio(audioUrl, audioPath)
+    .then(() => {
+        console.log('Audio downloaded successfully.');
+        transcribeAudio(audioPath);
+    })
+    .catch(err => {
+        console.error('Error downloading audio:', err);
+    });
+
   }
   //console.log(`discordClient message ${message.content}`, message.content);  
   const refer = message.content.toLowerCase();
