@@ -147,7 +147,7 @@ function handleMessage(senderPsid, receivedMessage) {
 //  attachments: [ { type: 'audio', payload: [Object] } ]
 
 
-  console.log(receivedMessage.text);
+  console.log('receiveMessage1', receivedMessage);
   let response;
 
   // Checks if the message contains text
@@ -306,7 +306,7 @@ function responseFromChatgpt(message) {
     let idx = message.content.indexOf(',');
   }
   const quest = message.content.substring(idx + 1);
-  message.reply('Hello from booto chat v1!');
+  message.reply('Hello from booto chat v2!');
 
   let params = {
     "model": "text-davinci-003",
