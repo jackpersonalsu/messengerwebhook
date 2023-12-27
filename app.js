@@ -305,7 +305,7 @@ function responseFromChatgpt(message) {
   let messages = [
     {
       "role": "user",
-      "content": "answer the following question: Bobo, what is the meaning of life?"
+      "content": `answer the following question: Bobo, ${message.content}?`
     }
   ];  
   console.log('messages is ', messages);
@@ -314,7 +314,7 @@ function responseFromChatgpt(message) {
     let idx = message.content.indexOf(',');
   }
   const quest = message.content.substring(idx + 1);
-  message.reply('Hello from booto chat v3!');
+  message.reply('Hello from booto chat v5!');
 
   let params = {
     // "model": "text-davinci-003",
@@ -334,9 +334,9 @@ function responseFromChatgpt(message) {
     json: params,
   }, (err0, res, body) => {
     console.log('openai response ', body);
-    console.log('openai response ', body.choices[0].text);
+    console.log('openai response ', body.choices[0].message);
     console.log('err', err0);
-    message.reply(body.choices[0].text);
+    message.reply(body.choices[0].message);
   });
 }
 
