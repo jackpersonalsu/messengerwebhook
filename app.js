@@ -332,7 +332,12 @@ discordClient.on('messageCreate', (message) => {
         },
       }, (err0, res, body) => {
         console.log('whisper response ', body);
-        console.log('whisper err', err0);
+        if (body.error) {
+          console.log('there is error in whisper');
+          message.reply('Cannot understand your voice message, please enter again');
+        } else {
+          responseFromChatgpt(message, body.text);
+        }
       });
     };
 
@@ -355,17 +360,20 @@ discordClient.on('messageCreate', (message) => {
 });
 
 
-function responseFromChatgpt(message) {
+function responseFromChatgpt(message, requestMessage = null) {
   console.log('responseFromChatgpt');
   // The page access token we have generated in your app settings
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
+  if (requestMessage === null) {
+    requestMessage = message.content;
+  }
   // let messages = '[{"role": "user", "content": "answer the following question: ' + message.content + '}"}]';
   let messages = [
     {
       "role": "user",
-      "content": `answer the following question: Bobo, ${message.content}?`
+      "content": `answer the following question: Bobo, ${requestMessage}?`
     }
   ];  
   console.log('messages is ', messages);
