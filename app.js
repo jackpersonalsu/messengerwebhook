@@ -276,7 +276,8 @@ discordClient.on('ready', () => {
 });
 
 discordClient.on('messageCreate', (message) => {
-  console.log("discordClient full message ", message);  
+  console.log("discordClient full message attachments ", message.attachments);  
+  console.log("discordClient full message attachments length ", message.attachments.size());  
   if (message.attachments.size() > 0) {
     console.log("discordClient attachment length: ", message.attachments.length);  
     console.log('attach is ', message.attachments[0]);
