@@ -32,7 +32,9 @@
 // Use dotenv to read .env vars into Node
 require('dotenv').config();
 const openai = require('openai');
-
+const axios = require('axios');
+const fs = require('fs');
+const { exec } = require('child_process');
 // Imports dependencies and set up http server
 const
   request = require('request'),
