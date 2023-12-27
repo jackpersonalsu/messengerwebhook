@@ -333,12 +333,15 @@ discordClient.on('messageCreate', (message) => {
       }, (err0, res, body) => {
         // console.log('whisper response: ', res);
         console.log('whisper response body ', body);
-        console.log('whisper response body zero ', body[0]);
-        console.log('whisper response body typeof  ', typeof body);
-        console.log('supported methods ', Object.getOwnPropertyNames(body).filter(function (p) {
+        val bodyObj = JSON.parse(body);
+
+        console.log('whisper response body json ', bodyObj);
+        console.log('whisper response body typeof ', typeof bodyObj);
+        console.log('supported methods ', Object.getOwnPropertyNames(bodyObj).filter(function (p) {
           return typeof Math[p] === 'function';
         }));
-        if (body.type === "invalid_request_error") {
+        console.log('whisper response body type ', bodyObj.type);
+        if (bodyObj.type === "invalid_request_error") {
           console.log('there is error in whisper');
           message.reply('Cannot understand your voice message, please enter again');
         } else {
