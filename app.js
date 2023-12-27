@@ -301,19 +301,19 @@ function responseFromChatgpt(message) {
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
-  let prompt = `answer the following question: ${message.content}`;
+  let prompt = `[{"role": "user", "content": "answer the following question: ${message.content}"}]`;
   let idx = message.content.indexOf(':');
   if (idx < 0) {
     let idx = message.content.indexOf(',');
   }
   const quest = message.content.substring(idx + 1);
-  message.reply('Hello from booto chat v2!');
+  message.reply('Hello from booto chat v3!');
 
   let params = {
     // "model": "text-davinci-003",
     "model": "gpt-3.5-turbo-1106",
-    "prompt": prompt,
-    "temperature": 0, 
+    "messages": prompt,
+    "temperature": 0.7, 
     "max_tokens": 1000,
   };
   console.log('sending request');
