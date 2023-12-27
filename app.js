@@ -282,7 +282,7 @@ discordClient.on('messageCreate', (message) => {
     const m = message.attachments;
     const attach =  m.entries().next().value;
     console.log('attach is ', attach);
-    console.log('attach url is ', attach.url);
+    console.log('attach url is ', attach[1].url);
   }
   //console.log(`discordClient message ${message.content}`, message.content);  
   const refer = message.content.toLowerCase();
