@@ -333,6 +333,8 @@ discordClient.on('messageCreate', (message) => {
       }, (err0, res, body) => {
         // console.log('whisper response: ', res);
         console.log('whisper response body ', body);
+        console.log('whisper response body error ', body[0]);
+        console.log('whisper response body error ', body[0].error);
         console.log('whisper response body error ', body.error);
         console.log('whisper response body type ', body.type);
         console.log('supported methods ', Object.getOwnPropertyNames(body));
