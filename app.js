@@ -138,15 +138,6 @@ app.post('/webhook', (req, res) => {
 
 // Handles messages events
 function handleMessage(senderPsid, receivedMessage) {
-  console.log('handle message', receivedMessage);
-
-//   message {
-
-//   mid: 'm__ZXg2RTfz_qByCrRMp__LtdMZVU2x8pI2h68-Nj-qgWKJpTD21lqLi0t5uMAsaINHD2f47_3iM6Emx3moICjkQ',
-    
-//  attachments: [ { type: 'audio', payload: [Object] } ]
-
-
   console.log('receiveMessage1', receivedMessage);
   let response;
 
@@ -285,7 +276,7 @@ discordClient.on('ready', () => {
 });
 
 discordClient.on('messageCreate', (message) => {
-  //console.log(`discordClient full message ${message}`, message);  
+  console.log(`discordClient full message ${message}`, message);  
   //console.log(`discordClient message ${message.content}`, message.content);  
   const refer = message.content.toLowerCase();
   if (refer.startsWith("@bobo") || refer.startsWith("bobo")) {
