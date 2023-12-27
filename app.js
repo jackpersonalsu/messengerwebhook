@@ -301,7 +301,8 @@ function responseFromChatgpt(message) {
   const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
   let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
-  let prompt = [{"role": "user", "content": `answer the following question: ${message.content}`}];
+  let prompt = `[{"role": "user", "content": "answer the following question: ${message.content}"}]`;
+  console.log('promot is ', prompt);
   let idx = message.content.indexOf(':');
   if (idx < 0) {
     let idx = message.content.indexOf(',');
@@ -312,7 +313,7 @@ function responseFromChatgpt(message) {
   let params = {
     // "model": "text-davinci-003",
     "model": "gpt-3.5-turbo-1106",
-    "messages": `${prompt}`,
+    "messages": prompt,
     "temperature": 0.7, 
     "max_tokens": 1000,
   };
