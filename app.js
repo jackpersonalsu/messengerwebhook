@@ -35,6 +35,7 @@ const openai = require('openai');
 const axios = require('axios');
 const fs = require('fs');
 const { exec } = require('child_process');
+const uuidv4 = require('uuid/v4');
 // Imports dependencies and set up http server
 const
   request = require('request'),
@@ -284,7 +285,8 @@ discordClient.on('messageCreate', (message) => {
     const m = message.attachments;
     const attach =  m.entries().next().value;
     const audioUrl = attach[1].url;
-    const audioPath = '/tmp/audio.mp3';
+    var filename = uuidv4();
+    const audioPath = '/tmp/' + filename + '.mp3';
     console.log('attach url is ', audioUrl, audioPath);
 
     const downloadAudio = async (url, path) => {
