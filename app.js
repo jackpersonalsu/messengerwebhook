@@ -285,6 +285,7 @@ discordClient.on('ready', () => {
 });
 
 discordClient.on('messageCreate', (message) => {
+  console.log(`discordClient full message ${message}`);  
   console.log(`discordClient message ${message.content}`);  
   const refer = message.content.toLowerCase();
   if (refer.startsWith("@bobo") || refer.startsWith("bobo")) {
