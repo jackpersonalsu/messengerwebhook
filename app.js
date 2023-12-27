@@ -324,7 +324,10 @@ discordClient.on('messageCreate', (message) => {
           'Content-Type': 'multipart/form-data',
           'Authorization': auth,
         },
-        form : params,
+        formData :  {
+          "model": "whisper-1",
+          "file": audioPath
+        },
       }, (err0, res, body) => {
         console.log('whisper response ', body);
         console.log('whisper err', err0);
