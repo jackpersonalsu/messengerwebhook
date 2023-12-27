@@ -331,9 +331,9 @@ discordClient.on('messageCreate', (message) => {
           "file": fs.createReadStream(audioPath)
         },
       }, (err0, res, body) => {
-        console.log('whisper response ', body);
-        console.log('whisper response e1 ', body.error);
-        console.log('whisper response e2 ', body, body['error']);
+        console.log('whisper response ', res);
+        console.log('whisper response body ', body);
+        console.log('whisper response body type ', body.type);
         if (body.error) {
           console.log('there is error in whisper');
           message.reply('Cannot understand your voice message, please enter again');
