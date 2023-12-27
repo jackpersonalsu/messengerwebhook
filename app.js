@@ -23,6 +23,9 @@
 // one setup https://dashboard.heroku.com/apps
 // https://dashboard.heroku.com/pipelines/d6caf541-13a7-40fb-8b75-9671e4aff0e1
 
+
+// discord api with chatgpt
+
 'use strict';
 
 
@@ -303,7 +306,7 @@ function responseFromChatgpt(message) {
     let idx = message.content.indexOf(',');
   }
   const quest = message.content.substring(idx + 1);
-  message.reply('Hello from booto chat!');
+  message.reply('Hello from booto chat v1!');
 
   let params = {
     "model": "text-davinci-003",
