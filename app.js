@@ -324,7 +324,7 @@ discordClient.on('messageCreate', (message) => {
           'Content-Type': 'multipart/form-data',
           'Authorization': auth,
         },
-        json: params,
+        form : params,
       }, (err0, res, body) => {
         console.log('whisper response ', body);
         console.log('whisper err', err0);
