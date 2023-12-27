@@ -338,8 +338,8 @@ discordClient.on('messageCreate', (message) => {
         if ((bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error')) {
           message.reply('Cannot understand your voice message, please enter again');
         } else {
-          console.log('whisper response body text ', body.text);
-          responseFromChatgpt(message, body.text);
+          console.log('whisper response body text ', bodyObj.text);
+          responseFromChatgpt(message, bodyObj.text);
         }
       });
     };
