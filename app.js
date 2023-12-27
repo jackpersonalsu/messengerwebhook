@@ -285,8 +285,8 @@ discordClient.on('ready', () => {
 });
 
 discordClient.on('messageCreate', (message) => {
-  console.log(`discordClient full message ${message}`, message);  
-  console.log(`discordClient message ${message.content}`, message.content);  
+  //console.log(`discordClient full message ${message}`, message);  
+  //console.log(`discordClient message ${message.content}`, message.content);  
   const refer = message.content.toLowerCase();
   if (refer.startsWith("@bobo") || refer.startsWith("bobo")) {
     console.log('bobo responding');
@@ -312,7 +312,7 @@ function responseFromChatgpt(message) {
   let params = {
     // "model": "text-davinci-003",
     "model": "gpt-3.5-turbo-1106",
-    "messages": prompt,
+    "messages": `${prompt}`,
     "temperature": 0.7, 
     "max_tokens": 1000,
   };
