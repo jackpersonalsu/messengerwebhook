@@ -326,7 +326,7 @@ discordClient.on('messageCreate', (message) => {
         },
         formData :  {
           "model": "whisper-1",
-          "file": audioPath
+          "file": fs.createReadStream(audioPath)
         },
       }, (err0, res, body) => {
         console.log('whisper response ', body);
