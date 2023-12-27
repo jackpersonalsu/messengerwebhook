@@ -340,9 +340,10 @@ discordClient.on('messageCreate', (message) => {
         console.log('supported methods ', Object.getOwnPropertyNames(bodyObj).filter(function (p) {
           return typeof Math[p] === 'function';
         }));
-        console.log('whisper response body type ', bodyObj.type);
-        if (bodyObj.type === "invalid_request_error") {
-          console.log('there is error in whisper');
+     
+        if (bodyObj.error !== undefined) {
+          console.log('there is error in whisper error ', bodyObj.error);
+          console.log('there is error in whisper error type ', bodyObj.error.type);
           message.reply('Cannot understand your voice message, please enter again');
         } else {
           responseFromChatgpt(message, body.text);
