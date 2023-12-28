@@ -36,7 +36,6 @@ const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
 const { exec } = require('child_process');
-const uuidv4 = require('uuid/v4');
 const tmp = require('tmp');
 // Imports dependencies and set up http server
 const
