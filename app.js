@@ -35,8 +35,9 @@ const openai = require('openai');
 const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
-const { exec } = require('child_process');
-const tmp = require('tmp');
+const crypto = require('crypto');
+// const { exec } = require('child_process');
+// const tmp = require('tmp');
 // Imports dependencies and set up http server
 const
   request = require('request'),
@@ -287,9 +288,8 @@ discordClient.on('messageCreate', (message) => {
     const attach =  m.entries().next().value;
     const audioUrl = attach[1].url;
 
-    const tmpobj = tmp.fileSync();
-    console.log('File: ', tmpobj.name);
-    const audioPath = tmpobj.name + '.mp3';
+    var filename = '/jacktmp'+crypto.randomBytes(4).readUInt32LE(0)+'.mp3';
+    const audioPath = os.tmpdir() + filename;
     console.log('attach url is ', audioUrl, audioPath);
 
     const downloadAudio = async (url, path) => {
