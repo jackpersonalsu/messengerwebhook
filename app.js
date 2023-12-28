@@ -328,12 +328,12 @@ discordClient.on('messageCreate', (message) => {
         },
         formData :  {
           "model": "whisper-1",
-          "response_format": "text",
           "file": fs.createReadStream(audioPath)
         },
       }, (err0, res, body) => {
         // console.log('whisper response: ', res);
         console.log('whisper response body ', body);
+
         let bodyObj = JSON.parse(body);
      
         if ((bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error')) {
