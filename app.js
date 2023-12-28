@@ -37,6 +37,7 @@ const FormData = require('form-data');
 const fs = require('fs');
 const { exec } = require('child_process');
 const uuidv4 = require('uuid/v4');
+const tmp = require('tmp');
 // Imports dependencies and set up http server
 const
   request = require('request'),
@@ -286,8 +287,10 @@ discordClient.on('messageCreate', (message) => {
     const m = message.attachments;
     const attach =  m.entries().next().value;
     const audioUrl = attach[1].url;
-    var filename = uuidv4();
-    const audioPath = '/tmp/' + filename + '.mp3';
+
+    const tmpobj = tmp.fileSync();
+    console.log('File: ', tmpobj.name);
+    const audioPath = tmpobj.name + '.mp3';
     console.log('attach url is ', audioUrl, audioPath);
 
     const downloadAudio = async (url, path) => {
