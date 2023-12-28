@@ -334,6 +334,12 @@ discordClient.on('messageCreate', (message) => {
       }, (err0, res, body) => {
         // console.log('whisper response: ', res);
         console.log('whisper response body ', body);
+        if ((body.includes('invalid_request_error')) {
+          message.reply('Cannot understand your voice message, please enter again');
+        } else {
+          responseFromChatgpt(message, body);
+        }
+
         responseFromChatgpt(message, body);
         // let bodyObj = JSON.parse(body);
      
