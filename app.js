@@ -336,7 +336,9 @@ discordClient.on('messageCreate', (message) => {
 
         let bodyObj = JSON.parse(body);
      
-        if ((bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error')) {
+        if (bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error') {
+          console.log('whisper response err is ', err0);
+          console.log('whisper response response is ', res);
           message.reply('Cannot understand your voice message, please enter again');
         } else {
           console.log('whisper response body text ', bodyObj.text);
