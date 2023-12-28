@@ -328,6 +328,7 @@ discordClient.on('messageCreate', (message) => {
         },
         formData :  {
           "model": "whisper-1",
+          "response_format": "text",
           "file": fs.createReadStream(audioPath)
         },
       }, (err0, res, body) => {
