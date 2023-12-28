@@ -326,7 +326,7 @@ discordClient.on('messageCreate', (message) => {
       })
       .then((response) => {
         console.log(response.data);
-        responseFromChatgpt(message, response.data);
+        responseFromChatgpt(message, response.data.text);
       })
       .catch((error) => {
         console.error("Error:", error.response ? error.response.data : error.message);
