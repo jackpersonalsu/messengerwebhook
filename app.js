@@ -33,6 +33,7 @@
 require('dotenv').config();
 const openai = require('openai');
 const axios = require('axios');
+const FormData = require('form-data');
 const fs = require('fs');
 const { exec } = require('child_process');
 const uuidv4 = require('uuid/v4');
@@ -311,40 +312,52 @@ discordClient.on('messageCreate', (message) => {
 
 
     const transcribeAudio = (path) => {
-      let params = 
-        {
-          "model": "whisper-1",
-          "file": audioPath
-        }
-      ;  
       let auth = `Bearer ${process.env.OPENAI_API_KEY}`;
 
-      request({
-        uri: 'https://api.openai.com/v1/audio/transcriptions',
-        method: "POST",
+      const form = new FormData();
+      form.append('model', 'whisper-1');
+      form.append('file', fs.createReadStream(audioPath));
+
+      axios.post('https://api.openai.com/v1/audio/transcriptions', form, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          ...form.getHeaders(),
           'Authorization': auth,
         },
-        formData :  {
-          'model': 'whisper-1',
-          'file': fs.createReadStream(audioPath)
-        },
-      }, (err0, res, body) => {
-        // console.log('whisper response: ', res);
-        console.log('whisper response body ', body);
-
-        let bodyObj = JSON.parse(body);
-     
-        if (bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error') {
-          console.log('whisper response err is ', err0);
-          console.log('whisper response response is ', res);
-          message.reply('Cannot understand your voice message, please enter again');
-        } else {
-          console.log('whisper response body text ', bodyObj.text);
-          responseFromChatgpt(message, bodyObj.text);
-        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        responseFromChatgpt(message, response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error.response ? error.response.data : error.message);
+        message.reply('Cannot understand your voice message, please enter again');
       });
+
+      // request({
+      //   uri: 'https://api.openai.com/v1/audio/transcriptions',
+      //   method: "POST",
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data',
+      //     'Authorization': auth,
+      //   },
+      //   formData :  {
+      //     'model': 'whisper-1',
+      //     'file': fs.createReadStream(audioPath)
+      //   },
+      // }, (err0, res, body) => {
+      //   console.log('whisper response body ', body);
+
+      //   let bodyObj = JSON.parse(body);
+     
+      //   if (bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error') {
+      //     console.log('whisper response err is ', err0);
+      //     console.log('whisper response response is ', res);
+      //     message.reply('Cannot understand your voice message, please enter again');
+      //   } else {
+      //     console.log('whisper response body text ', bodyObj.text);
+      //     responseFromChatgpt(message, bodyObj.text);
+      //   }
+      // });
     };
 
     downloadAudio(audioUrl, audioPath)
