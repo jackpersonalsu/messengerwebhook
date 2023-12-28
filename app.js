@@ -327,28 +327,21 @@ discordClient.on('messageCreate', (message) => {
           'Authorization': auth,
         },
         formData :  {
-          "model": "whisper-1",
-          "response_format": "text",
-          "file": fs.createReadStream(audioPath)
+          'model': 'whisper-1',
+          'file': fs.createReadStream(audioPath)
         },
       }, (err0, res, body) => {
         // console.log('whisper response: ', res);
         console.log('whisper response body ', body);
-        if (body.includes('invalid_request_error')) {
+
+        let bodyObj = JSON.parse(body);
+     
+        if ((bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error')) {
           message.reply('Cannot understand your voice message, please enter again');
         } else {
-          responseFromChatgpt(message, body);
+          console.log('whisper response body text ', bodyObj.text);
+          responseFromChatgpt(message, bodyObj.text);
         }
-
-        responseFromChatgpt(message, body);
-        // let bodyObj = JSON.parse(body);
-     
-        // if ((bodyObj.error !== undefined && bodyObj.error.type === 'invalid_request_error')) {
-        //   message.reply('Cannot understand your voice message, please enter again');
-        // } else {
-        //   console.log('whisper response body text ', bodyObj.text);
-        //   responseFromChatgpt(message, bodyObj.text);
-        // }
       });
     };
 
